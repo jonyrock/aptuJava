@@ -1,5 +1,7 @@
 package spbau.velikiy.task2;
 
+import java.io.FileNotFoundException;
+
 /**
  * Simple directories list
  *
@@ -27,9 +29,11 @@ public class Main {
 
             walker.list();
 
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            
             System.err.println(e.getMessage());
             System.exit(2);
+            
         }
 
     }

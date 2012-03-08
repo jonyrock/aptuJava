@@ -14,7 +14,6 @@ import java.util.Arrays;
  */
 public class FilesystemWalker {
 
-
     private final File startingDirectory;
     private final FileFilter filter;
     private final PrintStream outStream;
