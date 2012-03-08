@@ -14,7 +14,7 @@ public class PatternFilter implements FileFilter {
     /**
      * Matching regex pattern
      */
-    public final Pattern pattern;
+    private final Pattern pattern;
 
     /**
      * Constructor from pattern

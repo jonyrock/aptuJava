@@ -51,7 +51,7 @@ public class FilesystemWalker {
     private void getFileListing(String padding, File aStartingDir) throws FileNotFoundException {
 
         File[] filesAndDirs = null;
-
+        
         try {
 
             if (!aStartingDir.canRead()) {
@@ -60,7 +60,7 @@ public class FilesystemWalker {
             }
             
             filesAndDirs = aStartingDir.listFiles();
-            // It`s b******t, stupid task Java_hmw_2012_02_23
+            
         } catch (SecurityException e) {
             accessDeniedPrint(padding, aStartingDir);
         }
@@ -91,7 +91,7 @@ public class FilesystemWalker {
 
     private void accessDeniedPrint(String padding, File aStartingDir) {
         outStream.println(padding + aStartingDir.getName()
-                + "(access denied)");
+                + " (access denied)");
     }
 
     private void validateDirectory(File aDirectory) throws FileNotFoundException {
@@ -110,14 +110,14 @@ public class FilesystemWalker {
     }
 
     private String getSpacePadding(long len) {
+       
+        StringBuilder paddingBuilder = new StringBuilder();
 
-        String padding = "";
-
-        for (long i = 1; i <= len; i++) {
-            padding = padding + " ";
+        for (long i = 1; i <= len; i++) {            
+            paddingBuilder.append(" ");
         }
 
-        return padding;
+        return paddingBuilder.toString();
 
     }
 

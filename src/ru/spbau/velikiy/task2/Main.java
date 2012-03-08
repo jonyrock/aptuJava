@@ -1,7 +1,5 @@
 package spbau.velikiy.task2;
 
-import java.util.regex.*;
-
 /**
  * Simple directories list
  *
@@ -9,24 +7,23 @@ import java.util.regex.*;
  * @version %I%, %G%
  */
 public class Main {
-            
+
     /**
      * Start point
      *
      * @param args input (and output) file paths
-     *             
      */
     public static void main(String[] args) {
-        
+
         try {
-                                       
-            if(args.length < 1){
+
+            if (args.length < 1) {
                 System.err.println("Need directory path as first param");
                 System.exit(1);
             }
-                            
+
             FilesystemWalker walker = new FilesystemWalker(
-                    args[0], new PatternFilter("[^\\.].*") , System.out);
+                    args[0], new PatternFilter("[^\\.].*"), System.out);
 
             walker.list();
 
