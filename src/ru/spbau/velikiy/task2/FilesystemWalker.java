@@ -1,7 +1,10 @@
 package spbau.velikiy.task2;
 
-import java.util.*;
-import java.io.*;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.util.Arrays;
 
 /**
  * Is mechanism of listing directory
@@ -51,16 +54,16 @@ public class FilesystemWalker {
     private void getFileListing(String padding, File aStartingDir) throws FileNotFoundException {
 
         File[] filesAndDirs = null;
-        
+
         try {
 
             if (!aStartingDir.canRead()) {
                 accessDeniedPrint(padding, aStartingDir);
                 return;
             }
-            
+
             filesAndDirs = aStartingDir.listFiles();
-            
+
         } catch (SecurityException e) {
             accessDeniedPrint(padding, aStartingDir);
         }
@@ -75,7 +78,7 @@ public class FilesystemWalker {
             if (!filter.accept(file))
                 continue;
 
-            outStream.println(padding + "|_" + file.getName());
+            outStream.println(padding + "_" + file.getName());
 
             if (!file.isFile()) {
                 //must be a directory
@@ -95,6 +98,7 @@ public class FilesystemWalker {
     }
 
     private void validateDirectory(File aDirectory) throws FileNotFoundException {
+        
         if (aDirectory == null) {
             throw new IllegalArgumentException("Directory should not be null.");
         }
@@ -107,15 +111,18 @@ public class FilesystemWalker {
         if (!aDirectory.canRead()) {
             throw new IllegalArgumentException("Directory cannot be read: " + aDirectory);
         }
+        
     }
 
     private String getSpacePadding(long len) {
-       
+
         StringBuilder paddingBuilder = new StringBuilder();
 
-        for (long i = 1; i <= len; i++) {            
+        for (long i = 1; i <= len; i++) {
             paddingBuilder.append(" ");
         }
+
+        paddingBuilder.append("|");
 
         return paddingBuilder.toString();
 
