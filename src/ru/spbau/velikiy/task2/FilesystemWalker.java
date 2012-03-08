@@ -7,7 +7,7 @@ import java.io.PrintStream;
 import java.util.Arrays;
 
 /**
- * Is mechanism of listing directory
+ * Mechanism of listing directory
  *
  * @author Alexey Velikiy
  * @version %I%, %G%
@@ -31,7 +31,13 @@ public class FilesystemWalker {
             throws FileNotFoundException {
 
         startingDirectory = new File(path);
-        validateDirectory(startingDirectory);
+        
+        // yes, it is not good 
+        try {
+            validateDirectory(startingDirectory);
+        } catch (SecurityException s) {
+            accessDeniedPrint("", startingDirectory);
+        }
         this.filter = filter;
         this.outStream = outStream;
 
@@ -68,10 +74,11 @@ public class FilesystemWalker {
             accessDeniedPrint(padding, aStartingDir);
         }
 
-        Arrays.sort(filesAndDirs);
 
         if (filesAndDirs == null)
             return;
+
+        Arrays.sort(filesAndDirs);
 
         for (File file : filesAndDirs) {
 
@@ -98,7 +105,7 @@ public class FilesystemWalker {
     }
 
     private void validateDirectory(File aDirectory) throws FileNotFoundException {
-        
+
         if (aDirectory == null) {
             throw new IllegalArgumentException("Directory should not be null.");
         }
@@ -111,7 +118,7 @@ public class FilesystemWalker {
         if (!aDirectory.canRead()) {
             throw new IllegalArgumentException("Directory cannot be read: " + aDirectory);
         }
-        
+
     }
 
     private String getSpacePadding(long len) {
@@ -129,12 +136,3 @@ public class FilesystemWalker {
     }
 
 }
-
-
-
-
-
-
-
-
-    
