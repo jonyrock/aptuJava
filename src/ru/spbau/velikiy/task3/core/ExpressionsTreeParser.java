@@ -3,16 +3,16 @@ package spbau.velikiy.task3.core;
 import java.util.ArrayList;
 
 
-public class ExpressionsTreeParser<T extends ExpressionType> {
+public class ExpressionsTreeParser {
 
     private final char[] expressionString;
     private ExpressionMark[] expressionMarks;
     
     private Tree kernelTree;
     
-    private final T DEFAULT_VALUE;
+    private final int DEFAULT_VALUE;
     
-    public ExpressionsTreeParser(String expression, T defaultValue){
+    public ExpressionsTreeParser(String expression, int defaultValue){
 
         DEFAULT_VALUE = defaultValue;
         
@@ -20,7 +20,7 @@ public class ExpressionsTreeParser<T extends ExpressionType> {
         expressionString = s.toCharArray();
 
         fillMarkers();
-        kernelTree = new OperationConstant<T>(DEFAULT_VALUE);
+        kernelTree = new OperationConstant(DEFAULT_VALUE);
         kernelTree = buildTree(0, expressionString.length);
                 
     }

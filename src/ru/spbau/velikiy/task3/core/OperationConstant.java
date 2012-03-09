@@ -1,13 +1,14 @@
 package spbau.velikiy.task3.core;
 
 
-public class OperationConstant<T extends ExpressionType> extends Tree<T> {
+public class OperationConstant extends Tree{
     
-    private final ExpressionType value;
+    private final int value;
     
     public OperationConstant(T item, char[] s, int pointer){
         this.value = item.copy();
-        this.value.valueByString(s, pointer);
+        
+        //this..valueByString(s, pointer);
     }
         
     

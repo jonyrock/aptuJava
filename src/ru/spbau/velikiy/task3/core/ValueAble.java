@@ -1,7 +1,7 @@
 package spbau.velikiy.task3.core;
 
-public interface ValueAble<T extends ExpressionType> {
+public interface ValueAble {
 
-    ExpressionType value(ExpressionType xValue);
+    int value(int xValue);
 
 }

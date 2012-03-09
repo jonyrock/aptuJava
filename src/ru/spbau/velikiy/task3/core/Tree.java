@@ -1,23 +1,23 @@
 package spbau.velikiy.task3.core;
 
-public abstract class Tree<T extends ExpressionType> implements ValueAble<T> {
+public abstract class Tree implements ValueAble {
 
-    public Tree<T> left;
-    public Tree<T> right;
+    public Tree left;
+    public Tree right;
 
-    public Tree<T> operationsFabric(char op){
-
+    public Tree operationsFabric(char op){
+        
         if(op == '+')
-            return new OperationPlus<T>();
+            return new OperationPlus();
 
         if(op == '-')
-            return new OperationMinus<T>();
+            return new OperationMinus();
 
         if(op == '/')
-            return new OperationDivision<T>();
+            return new OperationDivision();
 
         if(op == '*')
-            return new OperationMultiplication<T>();
+            return new OperationMultiplication();
 
         return null;
 

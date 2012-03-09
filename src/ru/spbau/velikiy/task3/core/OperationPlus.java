@@ -1,8 +1,8 @@
 package spbau.velikiy.task3.core;
 
-public class OperationPlus<T extends ExpressionType> extends Tree<T> {
+public class OperationPlus extends Tree {
 
-    public ExpressionType value(ExpressionType xValue){       
+    public int value(int xValue){       
         return left.value(xValue).plus(right.value(xValue).getValue());
     }
 

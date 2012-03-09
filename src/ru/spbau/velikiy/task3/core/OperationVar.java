@@ -1,8 +1,8 @@
 package spbau.velikiy.task3.core;
 
-public class OperationVar<T extends ExpressionType> extends Tree<T> {
+public class OperationVar extends Tree {
 
-    public ExpressionType value(ExpressionType xValue){
+    public int value(int xValue){
          
         return xValue;
 
