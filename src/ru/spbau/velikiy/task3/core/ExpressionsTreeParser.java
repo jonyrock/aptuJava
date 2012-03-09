@@ -11,7 +11,6 @@ public class ExpressionsTreeParser {
     private ExpressionMark[] expressionMarks;
     private Tree rootTree;
     Pattern applicationPattern = Pattern.compile("([a-zA-Z]+)\\(");
-    
 
 
     public ExpressionsTreeParser(String expression) {
@@ -31,13 +30,13 @@ public class ExpressionsTreeParser {
         StringBuffer stringBuffer = new StringBuffer();
 
         Matcher matcher = applicationPattern.matcher(s);
-        
+
         while (matcher.find()) {
             matcher.appendReplacement(stringBuffer, matcher.group(1) + "@(");
         }
 
         matcher.appendTail(stringBuffer);
-        
+
         return stringBuffer.toString();
 
     }
@@ -60,55 +59,44 @@ public class ExpressionsTreeParser {
             return trees.get(0);
         }
 
-        for (int i = 0; i != ops.size(); i++) {
-            if (ops.get(i) == '/') {
-                Tree tr = new OperationDivision();
-                tr.left = trees.get(i);
-                tr.right = trees.get(i + 1);
-                trees.set(i, tr);
-                trees.remove(i + 1);
-                ops.remove(i);
-                return buildFromOneRangByTrees(trees, ops);
-            }
+        int i = ops.indexOf('/');
+        if (i != -1) {
+            return operatorParse(i, new OperationDivision(), trees, ops);
         }
 
-        for (int i = 0; i != ops.size(); i++) {
-            if (ops.get(i) == '*') {
-                Tree tr = new OperationMultiplication();
-                tr.left = trees.get(i);
-                tr.right = trees.get(i + 1);
-                trees.set(i, tr);
-                trees.remove(i + 1);
-                ops.remove(i);
-                return buildFromOneRangByTrees(trees, ops);
-            }
+        i = ops.indexOf('*');
+        if (i != -1) {
+            return operatorParse(i, new OperationMultiplication(), trees, ops);
         }
 
-        for (int i = 0; i != ops.size(); i++) {
-            if (ops.get(i) == '-') {
-                Tree tr = new OperationMinus();
-                tr.left = trees.get(i);
-                tr.right = trees.get(i + 1);
-                trees.set(i, tr);
-                trees.remove(i + 1);
-                ops.remove(i);
-                return buildFromOneRangByTrees(trees, ops);
-            }
+        i = ops.indexOf('-');
+        if (i != -1) {
+            return operatorParse(i, new OperationMinus(), trees, ops);
         }
 
-        for (int i = 0; i != ops.size(); i++) {
-            if (ops.get(i) == '+') {
-                Tree tr = new OperationPlus();
-                tr.left = trees.get(i);
-                tr.right = trees.get(i + 1);
-                trees.set(i, tr);
-                trees.remove(i + 1);
-                ops.remove(i);
-                return buildFromOneRangByTrees(trees, ops);
-            }
+        i = ops.indexOf('+');
+        if (i != -1) {
+            return operatorParse(i, new OperationPlus(), trees, ops);
+        }
+
+        i = ops.indexOf('@');
+        if (i != -1) {
+            return operatorParse(i, new OperationApply(), trees, ops);
         }
 
         return null;
+
+    }
+
+    private Tree operatorParse(int opCharPosition, Tree opObj, ArrayList<Tree> trees, ArrayList<Character> ops) {
+
+        opObj.left = trees.get(opCharPosition);
+        opObj.right = trees.get(opCharPosition + 1);
+        trees.set(opCharPosition, opObj);
+        trees.remove(opCharPosition + 1);
+        ops.remove(opCharPosition);
+
+        return buildFromOneRangByTrees(trees, ops);
 
     }
 
@@ -239,8 +227,8 @@ public class ExpressionsTreeParser {
                 inDigit = false;
             }
 
-            // If  operation
-            if (c == '-' || c == '+' || c == '*' || c == '/') {
+            // If operation
+            if (c == '-' || c == '+' || c == '*' || c == '/' || c == '@') {
                 expressionMarks[i] = new ExpressionMark();
                 expressionMarks[i].type = ExpressionMark.MarkType.BiOperation;
                 expressionMarks[i].value = deep;
