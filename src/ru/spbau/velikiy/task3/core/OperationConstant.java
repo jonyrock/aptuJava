@@ -32,7 +32,7 @@ public class OperationConstant extends Tree {
     }
 
 
-    public int value(int xValue) {
+    public int value(EvaluationContext context) {
 
         return value;
 

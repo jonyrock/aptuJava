@@ -47,9 +47,9 @@ public class ExpressionsTreeParser {
      * @param xValue value of function param
      * @return evaluated value
      */
-    public int getValue(int xValue) {
+    public int getValue(EvaluationContext context) {
 
-        return rootTree.value(xValue);
+        return rootTree.value(context);
 
     }
 

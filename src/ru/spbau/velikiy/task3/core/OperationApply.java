@@ -2,9 +2,9 @@ package spbau.velikiy.task3.core;
 
 public class OperationApply extends Tree {
 
-    public int value(int xValue){
+    public int value(EvaluationContext context){
                         
-        return 10;
+        return 0;
         
     }
 

@@ -21,7 +21,7 @@ public class Main {
 
         ExpressionsTreeParser e = new ExpressionsTreeParser(evalExpr);
 
-        System.out.println(e.getValue(10));
+        System.out.println(e.getValue(null));
 
     }
 

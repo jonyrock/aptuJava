@@ -2,15 +2,15 @@ package spbau.velikiy.task3.core;
 
 public class OperationMinus extends Tree {
 
-    public int value(int xValue) {
+    public int value(EvaluationContext context) {
         
         // if it is unary minus
         if(left == null){
-            return -right.value(xValue);
+            return -right.value(context);
         }
         
         // otherwise it is binary
-        return left.value(xValue) - right.value(xValue);
+        return left.value(context) - right.value(context);
         
     }
 

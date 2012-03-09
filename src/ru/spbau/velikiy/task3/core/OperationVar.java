@@ -16,15 +16,16 @@ public class OperationVar extends Tree {
             
             builder.append(s[pointer]);
             pointer++;
+            
         }
 
         name = builder.toString();
 
     }
 
-    public int value(int xValue) {
+    public int value(EvaluationContext context) {
 
-        return xValue;
+        return context.getVarValue(this.name);
 
     }
 
