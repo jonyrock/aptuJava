@@ -105,7 +105,7 @@ public class ExpressionsTreeParser {
     private Tree buildFromOneRang(int p, int q, OperationIndex[] ops) {
 
         if (ops.length == 1) {
-            Tree t = rootTree.operationsFabric(expressionString[ops[0].i]);
+            Tree t = Tree.operationsFabric(expressionString[ops[0].i]);
             t.left = buildTree(p, ops[0].i);
             t.right = buildTree(ops[0].i + 1, q);
             return t;

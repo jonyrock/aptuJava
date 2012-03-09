@@ -32,4 +32,8 @@ public class OperationVar extends Tree {
 
     }
 
+    @Override
+    public String getVarName() {
+        return this.name;
+    }
 }

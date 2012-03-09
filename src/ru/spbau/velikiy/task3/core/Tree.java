@@ -17,7 +17,7 @@ public abstract class Tree implements ValueAble {
      * @param op operation char
      * @return operation
      */
-    public Tree operationsFabric(char op){
+    public static Tree operationsFabric(char op){
         
         if(op == '+')
             return new OperationPlus();
@@ -38,4 +38,14 @@ public abstract class Tree implements ValueAble {
 
     }
 
+    /**
+     * This method uses for retrieving additional information
+     * about inner vars
+     * 
+     * @return name of 
+     */
+    public String getVarName(){
+        throw new NullPointerException("Not implemented");
+    }
+    
 }

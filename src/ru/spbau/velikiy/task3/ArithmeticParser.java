@@ -19,7 +19,6 @@ public class ArithmeticParser extends ExpressionsTreeParser {
 
         this.context = new EvaluationContext();
 
-
         for (int i = 0; i < programSource.length - 1; i++) {
 
             String[] parts = programSource[i].replace(" ", "").split("=");
@@ -35,11 +34,12 @@ public class ArithmeticParser extends ExpressionsTreeParser {
                 String functionName = matcher.group(1);
                 String argumentName = matcher.group(2);
 
-
                 context.addFunctionValue(functionName, argumentName, tree);
 
             } else {
+                
                 context.addVarValue(parts[0], tree);
+                
             }
 
         }
@@ -47,7 +47,7 @@ public class ArithmeticParser extends ExpressionsTreeParser {
     }
 
     public int evaluate() {
-        return 0;
+        return this.getRootTree().value(this.context);
     }
 
 }
