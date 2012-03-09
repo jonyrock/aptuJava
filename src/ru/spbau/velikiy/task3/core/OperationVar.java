@@ -8,7 +8,6 @@ public class OperationVar extends Tree {
 
         StringBuilder builder = new StringBuilder();
 
-
         while (pointer < s.length) {
             
             if (!Character.isLetter(s[pointer])){

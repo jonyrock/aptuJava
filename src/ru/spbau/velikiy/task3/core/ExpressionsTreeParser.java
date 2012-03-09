@@ -9,10 +9,10 @@ public class ExpressionsTreeParser {
 
     private final char[] expressionString;
     private ExpressionMark[] expressionMarks;
-    private Tree rootTree;
-    Pattern applicationPattern = Pattern.compile("([a-zA-Z]+)\\(");
+    private final Tree rootTree;
+    private final Pattern applicationPattern = Pattern.compile("([a-zA-Z]+)\\(");
 
-
+    
     public ExpressionsTreeParser(String expression) {
 
         String s = preprocessor(expression);
@@ -88,7 +88,8 @@ public class ExpressionsTreeParser {
 
     }
 
-    private Tree operatorParse(int opCharPosition, Tree opObj, ArrayList<Tree> trees, ArrayList<Character> ops) {
+    private Tree operatorParse(int opCharPosition, Tree opObj, 
+                               ArrayList<Tree> trees, ArrayList<Character> ops) {
 
         opObj.left = trees.get(opCharPosition);
         opObj.right = trees.get(opCharPosition + 1);
