@@ -4,10 +4,21 @@ package spbau.velikiy.task3.core;
 public class OperationConstant extends Tree{
     
     private final int value;
-    
-    public OperationConstant(int item, char[] s, int pointer){
+
+    /**
+     * 
+     * Create constant from source string expression 
+     * and pointer in it
+     * 
+     * @param s source expression
+     * @param pointer position in expression
+     */
+    public OperationConstant(char[] s, int pointer){
         
-        this.value = item;
+        this.value = 0;
+        
+        
+        this.value = 10;
                 
     }
         
