@@ -1,3 +1,4 @@
+10 * xasd + 10 - abb
 a = -3
 b = (3+a) * l
 f(x) = x*x
