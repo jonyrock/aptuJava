@@ -1,4 +1,7 @@
-package spbau.velikiy.task3.core;
+package spbau.velikiy.task3.core.operations;
+
+import spbau.velikiy.task3.core.EvaluationContext;
+import spbau.velikiy.task3.core.Tree;
 
 public class OperationPlus extends Tree {
 

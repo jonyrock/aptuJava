@@ -1,5 +1,7 @@
 package spbau.velikiy.task3.core;
 
+import spbau.velikiy.task3.core.operations.*;
+
 /**
  * Expression structure tree
  */

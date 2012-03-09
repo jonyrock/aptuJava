@@ -11,4 +11,12 @@ public class EvaluationContext {
         return 0;
     }
     
+    public void addVarValue(String name, Tree expr){
+        
+    }
+    
+    public void addFunctionValue(String name, String argName , Tree expr){
+
+    }
+    
 }

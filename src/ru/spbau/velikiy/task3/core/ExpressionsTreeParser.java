@@ -1,5 +1,7 @@
 package spbau.velikiy.task3.core;
 
+import spbau.velikiy.task3.core.operations.*;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -7,10 +9,12 @@ import java.util.regex.Pattern;
 
 public class ExpressionsTreeParser {
 
+    private final Tree rootTree;
+    
     private final char[] expressionString;
     private ExpressionMark[] expressionMarks;
-    private final Tree rootTree;
-    private final Pattern applicationPattern = Pattern.compile("([a-zA-Z]+)\\(");
+
+    private static final Pattern applicationPattern = Pattern.compile("([a-zA-Z]+)\\(");
 
     
     public ExpressionsTreeParser(String expression) {
@@ -21,6 +25,15 @@ public class ExpressionsTreeParser {
         fillMarkers();
         rootTree = buildTree(0, expressionString.length);
 
+    }
+
+    /**
+     * get evaluation tree
+     * 
+     * @return evaluation tree
+     */
+    public Tree getRootTree(){
+        return rootTree;
     }
 
     private String preprocessor(String s) {
@@ -38,18 +51,6 @@ public class ExpressionsTreeParser {
         matcher.appendTail(stringBuffer);
 
         return stringBuffer.toString();
-
-    }
-
-    /**
-     * Evaluate expression
-     *
-     * @param xValue value of function param
-     * @return evaluated value
-     */
-    public int getValue(EvaluationContext context) {
-
-        return rootTree.value(context);
 
     }
 
