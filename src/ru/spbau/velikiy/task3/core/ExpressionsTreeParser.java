@@ -125,7 +125,7 @@ public class ExpressionsTreeParser {
 
         ArrayList<OperationIndex> ops = new ArrayList<OperationIndex>();
 
-        // Loop executes only once or twice so it is the constant operation
+        // Loop executes only once or twice so it is fast
         while (i < q) {
 
             if (expressionMarks[i] == null){

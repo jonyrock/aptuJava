@@ -6,7 +6,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class Main {
-
+    
+    // TODO stop throw exception 
     public static void main(String[] args) throws Exception {
 
         if (args.length == 0) {
@@ -29,6 +30,5 @@ public class Main {
         System.out.println(e.getValue(10));
 
     }
-
 
 }
