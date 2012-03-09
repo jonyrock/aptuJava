@@ -1,8 +1,7 @@
 package spbau.velikiy.task3.expressionTypes;
 
-import spbau.velikiy.task3.core.ExpressionType;
 
-public class IntegerExpressionType implements ExpressionType<Integer> {
+public class IntegerExpressionType {
     
     private Integer value;
     public IntegerExpressionType(Integer value){

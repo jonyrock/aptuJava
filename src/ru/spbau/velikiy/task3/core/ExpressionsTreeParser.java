@@ -25,7 +25,7 @@ public class ExpressionsTreeParser {
                 
     }
     
-    public ExpressionType getValue(ExpressionType xValue){
+    public int getValue(int xValue){
         
         return kernelTree.value(xValue);
         
@@ -154,10 +154,10 @@ public class ExpressionsTreeParser {
             return buildTree(p + 1, expressionMarks[p].value);
 
         if (expressionMarks[p].type == ExpressionMark.MarkType.Var)
-            return new OperationVar<T>();
+            return new OperationVar();
 
         if (expressionMarks[p].type == ExpressionMark.MarkType.Num) {            
-            return new OperationConstant<T>(DEFAULT_VALUE, expressionString, p);
+            return new OperationConstant(DEFAULT_VALUE, expressionString, p);
         }
 
         

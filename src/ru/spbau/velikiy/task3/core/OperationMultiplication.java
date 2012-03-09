@@ -1,9 +1,9 @@
 package spbau.velikiy.task3.core;
 
-public class OperationMultiplication<T extends ExpressionType> extends Tree<T> {
+public class OperationMultiplication extends Tree{
 
-    public ExpressionType value(ExpressionType xValue){       
-        return left.value(xValue).multiplication(right.value(xValue).getValue());
+    public int value(int xValue){       
+        return left.value(xValue) * right.value(xValue);
     }
 
 }

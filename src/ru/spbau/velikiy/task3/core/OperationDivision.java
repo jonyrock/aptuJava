@@ -1,9 +1,9 @@
 package spbau.velikiy.task3.core;
 
-public class OperationDivision<T extends ExpressionType> extends Tree<T> {
+public class OperationDivision extends Tree {
 
-    public ExpressionType value(ExpressionType xValue){       
-        return left.value(xValue).division(right.value(xValue).getValue());
+    public int value(int xValue){       
+        return left.value(xValue) / right.value(xValue);
     }
 
 }

@@ -5,18 +5,18 @@ public class OperationConstant extends Tree{
     
     private final int value;
     
-    public OperationConstant(T item, char[] s, int pointer){
-        this.value = item.copy();
+    public OperationConstant(int item, char[] s, int pointer){
         
-        //this..valueByString(s, pointer);
+        this.value = item;
+                
     }
         
     
-    public OperationConstant(T value){
+    public OperationConstant(int value){
         this.value = value;        
     }
     
-    public ExpressionType value(ExpressionType xValue){
+    public int value(int xValue){
         
         return value;
 
