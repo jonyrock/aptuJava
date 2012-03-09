@@ -17,11 +17,14 @@ public class OperationConstant extends Tree {
         int parsedValue = 0;
 
         while (pointer < s.length) {
+            
             if (!Character.isDigit(s[pointer])) {
                 break;
             }
+            
             parsedValue = parsedValue * 10 + Character.digit(s[pointer], 10);
             pointer++;
+            
         }
         
         value = parsedValue;        
