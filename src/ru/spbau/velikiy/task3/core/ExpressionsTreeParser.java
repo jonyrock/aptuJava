@@ -9,18 +9,15 @@ public class ExpressionsTreeParser {
     private ExpressionMark[] expressionMarks;
     
     private Tree kernelTree;
-    
-    private final int DEFAULT_VALUE;
-    
-    public ExpressionsTreeParser(String expression, int defaultValue){
-
-        DEFAULT_VALUE = defaultValue;
         
+    
+    public ExpressionsTreeParser(String expression){
+              
         String s = expression.replace(" ", "");
         expressionString = s.toCharArray();
 
         fillMarkers();
-        kernelTree = new OperationConstant(DEFAULT_VALUE);
+        kernelTree = new OperationConstant(0);
         kernelTree = buildTree(0, expressionString.length);
                 
     }
@@ -157,7 +154,7 @@ public class ExpressionsTreeParser {
             return new OperationVar();
 
         if (expressionMarks[p].type == ExpressionMark.MarkType.Num) {            
-            return new OperationConstant(DEFAULT_VALUE, expressionString, p);
+            return new OperationConstant(0, expressionString, p);
         }
 
         
@@ -167,6 +164,7 @@ public class ExpressionsTreeParser {
     }
 
     void fillMarkers() {
+        
         expressionMarks = new ExpressionMark[expressionString.length];
         java.util.Stack<Integer> stack = new java.util.Stack<Integer>();
 
@@ -186,7 +184,8 @@ public class ExpressionsTreeParser {
             }
 
             // If digit or not
-            if (Character.isDigit(c) || c == '.') {
+            if (Character.isDigit(c)) {
+                
                 if (!inDigit) {
                     inDigit = true;
                     stack.push(i);

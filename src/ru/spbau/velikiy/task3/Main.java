@@ -21,14 +21,12 @@ public class Main {
 
 
         BufferedReader reader = new BufferedReader(new FileReader(args[0]));
-        
+
         String evalExpr = reader.readLine();
 
-        ExpressionsTreeParser e =
-                new ExpressionsTreeParser(evalExpr, 0);
-        for(int i = 0; i < 10; i++){
-            System.out.println(e.getValue(10));
-        }
+        ExpressionsTreeParser e = new ExpressionsTreeParser(evalExpr);
+
+        System.out.println(e.getValue(10));
 
     }
 
