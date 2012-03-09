@@ -1,6 +1,8 @@
 package spbau.velikiy.task3.core;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class ExpressionsTreeParser {
@@ -8,24 +10,49 @@ public class ExpressionsTreeParser {
     private final char[] expressionString;
     private ExpressionMark[] expressionMarks;
     private Tree rootTree;
+    Pattern applicationPattern = Pattern.compile("([a-zA-Z]+)\\(");
+    
 
 
     public ExpressionsTreeParser(String expression) {
 
-        String s = expression.replace(" ", "");
+        String s = preprocessor(expression);
         expressionString = s.toCharArray();
 
-        fillMarkers();        
+        fillMarkers();
         rootTree = buildTree(0, expressionString.length);
 
     }
 
+    private String preprocessor(String s) {
+
+        s = s.replace(" ", "");
+
+        StringBuffer stringBuffer = new StringBuffer();
+
+        Matcher matcher = applicationPattern.matcher(s);
+        
+        while (matcher.find()) {
+            matcher.appendReplacement(stringBuffer, matcher.group(1) + "@(");
+        }
+
+        matcher.appendTail(stringBuffer);
+        
+        return stringBuffer.toString();
+
+    }
+
+    /**
+     * Evaluate expression
+     *
+     * @param xValue value of function param
+     * @return evaluated value
+     */
     public int getValue(int xValue) {
 
         return rootTree.value(xValue);
 
     }
-
 
     private Tree buildFromOneRangByTrees(ArrayList<Tree> trees, ArrayList<Character> ops) {
 
@@ -247,11 +274,10 @@ public class ExpressionsTreeParser {
             int q = stack.pop();
             expressionMarks[q] = new ExpressionMark();
             expressionMarks[q].type = ExpressionMark.MarkType.Var;
-            expressionMarks[q].value = expressionMarks.length;            
+            expressionMarks[q].value = expressionMarks.length;
         }
 
     }
-
 
     private static class OperationIndex {
 
