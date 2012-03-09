@@ -15,8 +15,7 @@ public class ExpressionsTreeParser {
         String s = expression.replace(" ", "");
         expressionString = s.toCharArray();
 
-        fillMarkers();
-        rootTree = new OperationConstant(0);
+        fillMarkers();        
         rootTree = buildTree(0, expressionString.length);
 
     }
@@ -100,12 +99,12 @@ public class ExpressionsTreeParser {
 
         opChs.add(ops[0].c);
         trees.add(buildTree(p, ops[0].i));
-        
+
         for (int i = 1; i != ops.length; i++) {
             opChs.add(ops[i].c);
             trees.add(buildTree(ops[i - 1].i + 1, ops[i].i));
         }
-        
+
         trees.add(buildTree(ops[ops.length - 1].i + 1, q));
 
         return buildFromOneRangByTrees(trees, opChs);
@@ -128,7 +127,7 @@ public class ExpressionsTreeParser {
         // Loop executes only once or twice so it is fast
         while (i < q) {
 
-            if (expressionMarks[i] == null){
+            if (expressionMarks[i] == null) {
                 break;
             }
 
@@ -144,17 +143,16 @@ public class ExpressionsTreeParser {
 
         }
 
-        if (ops.size() > 0){
+        if (ops.size() > 0) {
             return buildFromOneRang(p, q, ops.toArray(new OperationIndex[ops.size()]));
         }
 
-        if (expressionMarks[p].type == ExpressionMark.MarkType.Bracket){
+        if (expressionMarks[p].type == ExpressionMark.MarkType.Bracket) {
             return buildTree(p + 1, expressionMarks[p].value);
         }
 
-        if (expressionMarks[p].type == ExpressionMark.MarkType.Var){
-            //TODO: set context to var
-            return new OperationVar();
+        if (expressionMarks[p].type == ExpressionMark.MarkType.Var) {
+            return new OperationVar(expressionString, p);
         }
 
         if (expressionMarks[p].type == ExpressionMark.MarkType.Num) {
@@ -180,12 +178,21 @@ public class ExpressionsTreeParser {
 
             char c = expressionString[i];
 
-            // If var
-            if (c == 'x') {
-                expressionMarks[i] = new ExpressionMark();
-                expressionMarks[i].type = ExpressionMark.MarkType.Var;
-                expressionMarks[i].value = i + 1;
+            // If var name or not
+            if (Character.isLetter(c)) {
+
+                if (!inVarName) {
+                    inVarName = true;
+                    stack.push(i);
+                }
                 continue;
+
+            } else if (inVarName) {
+                int q = stack.pop();
+                expressionMarks[q] = new ExpressionMark();
+                expressionMarks[q].type = ExpressionMark.MarkType.Var;
+                expressionMarks[q].value = i;
+                inVarName = false;
             }
 
             // If digit or not
@@ -234,6 +241,13 @@ public class ExpressionsTreeParser {
             expressionMarks[q] = new ExpressionMark();
             expressionMarks[q].type = ExpressionMark.MarkType.Num;
             expressionMarks[q].value = expressionMarks.length;
+        }
+
+        if (inVarName) {
+            int q = stack.pop();
+            expressionMarks[q] = new ExpressionMark();
+            expressionMarks[q].type = ExpressionMark.MarkType.Var;
+            expressionMarks[q].value = expressionMarks.length;            
         }
 
     }

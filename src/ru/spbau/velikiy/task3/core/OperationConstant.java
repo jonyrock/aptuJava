@@ -32,10 +32,6 @@ public class OperationConstant extends Tree {
     }
 
 
-    public OperationConstant(int value) {
-        this.value = value;
-    }
-
     public int value(int xValue) {
 
         return value;
