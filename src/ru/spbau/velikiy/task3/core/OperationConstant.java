@@ -16,10 +16,13 @@ public class OperationConstant extends Tree{
     public OperationConstant(char[] s, int pointer){
         
         this.value = 0;
+
+        //this.value.valueByString(s, pointer);
         
         
-        this.value = 10;
-                
+        //this.value = 10;
+
+
     }
         
     
