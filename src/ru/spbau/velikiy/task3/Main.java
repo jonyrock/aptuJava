@@ -1,5 +1,7 @@
 package spbau.velikiy.task3;
 
+import spbau.velikiy.task3.exceptions.ParserEvaluationException;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -32,16 +34,21 @@ public class Main {
 
         ArithmeticParser parser = new ArithmeticParser(sourceLines);
 
-        System.out.println(parser.evaluate());
+        try {
+            System.out.println(parser.evaluate());
+        } catch (ParserEvaluationException e) {
+            System.out.println(e.getMessage());
+            System.exit(2);
+        }
 
     }
 
     private static String[] getSourceLines(String sourceFile) {
 
-        BufferedReader reader = null;        
+        BufferedReader reader = null;
 
         try {
-            
+
             reader = new BufferedReader(new FileReader(sourceFile));
 
             ArrayList<String> sourceLines = new ArrayList<String>();
@@ -51,9 +58,9 @@ public class Main {
 
             return sourceLines.toArray(new String[sourceLines.size()]);
 
-        } catch (FileNotFoundException e) {            
+        } catch (FileNotFoundException e) {
             System.out.println("Can't read file " + sourceFile);
-        } catch (IOException e) {            
+        } catch (IOException e) {
             System.out.println("Error occurred while reading");
         } finally {
             if (reader != null) {

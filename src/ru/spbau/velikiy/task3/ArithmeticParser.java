@@ -3,6 +3,7 @@ package spbau.velikiy.task3;
 import spbau.velikiy.task3.core.EvaluationContext;
 import spbau.velikiy.task3.core.ExpressionsTreeParser;
 import spbau.velikiy.task3.core.Tree;
+import spbau.velikiy.task3.exceptions.ParserEvaluationException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -57,10 +58,12 @@ public class ArithmeticParser extends ExpressionsTreeParser {
 
     /**
      * evaluate last expression from sources lines 
+     * 
      * @return integer value
+     * @throws ParserEvaluationException if can't evaluate 
      */
-    public int evaluate() {
-        this.context.getVarValue("asdasd");
+    
+    public int evaluate() throws ParserEvaluationException {        
         return this.getRootTree().value(this.context);
     }
 
