@@ -3,10 +3,15 @@ package spbau.velikiy.task3.core.operations;
 
 import spbau.velikiy.task3.core.EvaluationContext;
 import spbau.velikiy.task3.core.Tree;
+import spbau.velikiy.task3.exceptions.ParserParsingException;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class OperationConstant extends Tree {
 
     private final int value;
+    private static final Pattern constantPattern = Pattern.compile("(\\d+).*?");
 
     /**
      * Create constant from source string expression
@@ -14,23 +19,20 @@ public class OperationConstant extends Tree {
      *
      * @param s       source expression
      * @param pointer position in expression
+     * @throws ParserParsingException if can't parse
      */
-    public OperationConstant(char[] s, int pointer) {
+    public OperationConstant(char[] s, int pointer) throws ParserParsingException {
 
         int parsedValue = 0;
 
-        while (pointer < s.length) {
-
-            if (!Character.isDigit(s[pointer])) {
-                break;
-            }
-
-            parsedValue = parsedValue * 10 + Character.digit(s[pointer], 10);
-            pointer++;
-
+        CharSequence seq = java.nio.CharBuffer.wrap(s, pointer, s.length);
+        Matcher matcher = constantPattern.matcher(seq);
+        if (matcher.matches()) {
+            value = Integer.parseInt(matcher.group(1));
+        } else {
+            throw new ParserParsingException("Expected digits");
         }
 
-        value = parsedValue;
 
     }
 
@@ -38,9 +40,9 @@ public class OperationConstant extends Tree {
      * evaluate expression according to context
      *
      * @param context definitions of vars.
-     * @return constant value
+     * @return constant calculateValue
      */
-    public int value(EvaluationContext context) {
+    public int calculateValue(EvaluationContext context) {
 
         return value;
 

@@ -38,14 +38,14 @@ public class EvaluationContext {
         if (t == null) {
             throw new ParserEvaluationException("Undefined var " + name);
         }
-        return t.value(this);
+        return t.calculateValue(this);
     }
 
     /**
-     * get function and evaluate it with certain argument value
+     * get function and evaluate it with certain argument calculateValue
      *
      * @param name  var name
-     * @param value is value for function argument
+     * @param value is calculateValue for function argument
      * @return evaluated expression bounded with var
      * @throws ParserEvaluationException when can't find definition
      */
@@ -56,7 +56,7 @@ public class EvaluationContext {
         if (t == null) {
             throw new ParserEvaluationException("Undefined function " + name);
         }
-        return t.tree.value(
+        return t.tree.calculateValue(
                 new FunctionEvaluationContext(t.argumentName,
                         value, this));
 

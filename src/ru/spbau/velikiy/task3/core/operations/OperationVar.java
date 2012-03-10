@@ -38,10 +38,10 @@ public class OperationVar extends Tree {
      * evaluate expression according to context
      *
      * @param context definitions of vars.
-     * @return constant value
+     * @return constant calculateValue
      * @throws ParserEvaluationException if error is occurred
      */
-    public int value(EvaluationContext context) throws ParserEvaluationException {
+    public int calculateValue(EvaluationContext context) throws ParserEvaluationException {
 
         return context.getVarValue(this.name);
 

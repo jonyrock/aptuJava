@@ -59,11 +59,11 @@ public class ArithmeticParser extends ExpressionsTreeParser {
     /**
      * evaluate last expression from sources lines 
      * 
-     * @return integer value
+     * @return integer calculateValue
      * @throws ParserEvaluationException if can't evaluate 
      */    
     public int evaluate() throws ParserEvaluationException {        
-        return this.getRootTree().value(this.context);
+        return this.getRootTree().calculateValue(this.context);
     }
 
 }

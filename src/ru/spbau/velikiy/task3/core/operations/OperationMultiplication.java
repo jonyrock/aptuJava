@@ -10,17 +10,17 @@ public class OperationMultiplication extends Tree {
      * evaluate expression according to context
      *
      * @param context definitions of vars.
-     * @return constant value
+     * @return constant calculateValue
      * @throws ParserEvaluationException if error is occurred 
      */
-    public int value(EvaluationContext context) throws ParserEvaluationException {
+    public int calculateValue(EvaluationContext context) throws ParserEvaluationException {
         
         // lazy evaluation
-        int leftValue = left.value(context);
+        int leftValue = left.calculateValue(context);
         if(leftValue == 0)
             return 0;
         
-        return leftValue * right.value(context);
+        return leftValue * right.calculateValue(context);
         
     }
 

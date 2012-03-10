@@ -15,9 +15,9 @@ public interface ValueAble {
      * evaluate expression according to context
      * 
      * @param context definitions of vars
-     * @return expression evaluated value
+     * @return expression evaluated calculateValue
      * @throws ParserEvaluationException if error is occurred
      */
-    int value(EvaluationContext context) throws ParserEvaluationException;
+    int calculateValue(EvaluationContext context) throws ParserEvaluationException;
 
 }

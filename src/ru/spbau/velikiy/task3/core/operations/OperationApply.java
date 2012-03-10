@@ -17,13 +17,13 @@ public class OperationApply extends Tree {
      * evaluate expression according to context
      *
      * @param context definitions of vars
-     * @return expression evaluated value
+     * @return expression evaluated calculateValue
      * @throws ParserEvaluationException if error is occurred
      */
-    public int value(EvaluationContext context) throws ParserEvaluationException {
+    public int calculateValue(EvaluationContext context) throws ParserEvaluationException {
 
         String functionName = this.left.getVarName();
-        int argValue = right.value(context);
+        int argValue = right.calculateValue(context);
         return context.evalFunction(functionName, argValue);
 
     }
