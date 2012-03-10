@@ -3,6 +3,7 @@ package spbau.velikiy.task3.core;
 import spbau.velikiy.task3.exceptions.ParserEvaluationException;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Represent mechanism of storing program context,
@@ -17,13 +18,12 @@ public class EvaluationContext {
     /**
      * contains defined vars
      */
-    protected HashMap<String, Tree> mapVars = new HashMap<String, Tree>();
+    protected Map<String, Tree> mapVars = new HashMap<String, Tree>();
 
     /**
      * contains defined functions with their argument name
      */
-    protected HashMap<String, FunctionArgumentTree> mapFunctions =
-            new HashMap<String, FunctionArgumentTree>();
+    protected Map<String, FunctionArgumentTree> mapFunctions = new HashMap<String, FunctionArgumentTree>();
 
     /**
      * get var definition
@@ -38,14 +38,14 @@ public class EvaluationContext {
         if (t == null) {
             throw new ParserEvaluationException("Undefined var " + name);
         }
-        return t.calculateValue(this);
+        return t.evaluate(this);
     }
 
     /**
-     * get function and evaluate it with certain argument calculateValue
+     * get function and evaluate it with certain argument evaluate
      *
      * @param name  var name
-     * @param value is calculateValue for function argument
+     * @param value is evaluate for function argument
      * @return evaluated expression bounded with var
      * @throws ParserEvaluationException when can't find definition
      */
@@ -56,7 +56,7 @@ public class EvaluationContext {
         if (t == null) {
             throw new ParserEvaluationException("Undefined function " + name);
         }
-        return t.tree.calculateValue(
+        return t.tree.evaluate(
                 new FunctionEvaluationContext(t.argumentName,
                         value, this));
 

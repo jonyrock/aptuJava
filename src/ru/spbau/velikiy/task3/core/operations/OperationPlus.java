@@ -10,11 +10,11 @@ public class OperationPlus extends Tree {
      * evaluate expression according to context
      *
      * @param context definitions of vars.
-     * @return constant calculateValue
+     * @return constant evaluate
      * @throws ParserEvaluationException if error is occurred
      */
-    public int calculateValue(EvaluationContext context) throws ParserEvaluationException {
-        return left.calculateValue(context) + right.calculateValue(context);
+    public int evaluate(EvaluationContext context) throws ParserEvaluationException {
+        return left.evaluate(context) + right.evaluate(context);
     }
 
 }

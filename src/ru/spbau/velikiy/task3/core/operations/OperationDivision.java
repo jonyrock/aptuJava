@@ -10,17 +10,18 @@ public class OperationDivision extends Tree {
      * evaluate expression according to context
      *
      * @param context definitions of vars.
-     * @return constant calculateValue
+     * @return constant evaluate
      * @throws ParserEvaluationException if error is occurred
      */
-    public int calculateValue(EvaluationContext context) throws ParserEvaluationException {
+    public int evaluate(EvaluationContext context) throws ParserEvaluationException {
 
         // lazy evaluation
-        int leftValue = left.calculateValue(context);
-        if (leftValue == 0)
+        int leftValue = left.evaluate(context);
+        if (leftValue == 0){
             return 0;
+        }
 
-        return leftValue / right.calculateValue(context);
+        return leftValue / right.evaluate(context);
     }
 
 }

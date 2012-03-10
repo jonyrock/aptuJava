@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public class OperationConstant extends Tree {
 
     private final int value;
-    private static final Pattern constantPattern = Pattern.compile("(\\d+).*?");
+    private static final Pattern CONSTANT_PATTERN = Pattern.compile("(\\d+)");
 
     /**
      * Create constant from source string expression
@@ -22,12 +22,10 @@ public class OperationConstant extends Tree {
      * @throws ParserParsingException if can't parse
      */
     public OperationConstant(char[] s, int pointer) throws ParserParsingException {
-
-        int parsedValue = 0;
-
-        CharSequence seq = java.nio.CharBuffer.wrap(s, pointer, s.length);
-        Matcher matcher = constantPattern.matcher(seq);
-        if (matcher.matches()) {
+        
+        CharSequence seq = java.nio.CharBuffer.wrap(s, pointer, s.length - pointer);
+        Matcher matcher = CONSTANT_PATTERN.matcher(seq);
+        if (matcher.find()) {
             value = Integer.parseInt(matcher.group(1));
         } else {
             throw new ParserParsingException("Expected digits");
@@ -40,9 +38,9 @@ public class OperationConstant extends Tree {
      * evaluate expression according to context
      *
      * @param context definitions of vars.
-     * @return constant calculateValue
+     * @return constant evaluate
      */
-    public int calculateValue(EvaluationContext context) {
+    public int evaluate(EvaluationContext context) {
 
         return value;
 

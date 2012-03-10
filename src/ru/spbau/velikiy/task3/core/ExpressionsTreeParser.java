@@ -1,13 +1,14 @@
 package spbau.velikiy.task3.core;
 
 import spbau.velikiy.task3.core.operations.*;
+import spbau.velikiy.task3.exceptions.ParserParsingException;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Parse expression and build evaluation tree from it 
+ * Parse expression and build evaluation tree from it
  *
  * @author Alexey Velikiy. APTU. Java. Homework 3.
  * @version %I%, %G%
@@ -16,7 +17,7 @@ import java.util.regex.Pattern;
 public class ExpressionsTreeParser {
 
     private final Tree rootTree;
-    
+
     private final char[] expressionString;
     private ExpressionMark[] expressionMarks;
 
@@ -24,9 +25,11 @@ public class ExpressionsTreeParser {
 
     /**
      * build evaluation tree from source code
-     * @param expression source code line to build evaluation tree 
+     *
+     * @param expression source code line to build evaluation tree
+     * @throws ParserParsingException if can't parse
      */
-    public ExpressionsTreeParser(String expression) {
+    public ExpressionsTreeParser(String expression) throws ParserParsingException {
 
         String s = preprocessor(expression);
         expressionString = s.toCharArray();
@@ -38,10 +41,10 @@ public class ExpressionsTreeParser {
 
     /**
      * get evaluation tree
-     * 
+     *
      * @return evaluation tree
      */
-    public Tree getRootTree(){
+    public Tree getRootTree() {
         return rootTree;
     }
 
@@ -63,13 +66,21 @@ public class ExpressionsTreeParser {
 
     }
 
-    private Tree buildFromOneRangByTrees(ArrayList<Tree> trees, ArrayList<Character> ops) {
+    private Tree buildFromOneRangByTrees(ArrayList<Tree> trees, ArrayList<Character> ops) 
+            throws ParserParsingException{
 
         if (ops.isEmpty()) {
             return trees.get(0);
         }
 
-        int i = ops.indexOf('/');
+        int i;
+
+        i = ops.indexOf('@');
+        if (i != -1) {
+            return operatorParse(i, new OperationApply(), trees, ops);
+        }
+        
+        i = ops.indexOf('/');
         if (i != -1) {
             return operatorParse(i, new OperationDivision(), trees, ops);
         }
@@ -89,17 +100,13 @@ public class ExpressionsTreeParser {
             return operatorParse(i, new OperationPlus(), trees, ops);
         }
 
-        i = ops.indexOf('@');
-        if (i != -1) {
-            return operatorParse(i, new OperationApply(), trees, ops);
-        }
-
-        return null;
+       
+        throw new ParserParsingException("Undefined operator");
 
     }
 
-    private Tree operatorParse(int opCharPosition, Tree opObj, 
-                               ArrayList<Tree> trees, ArrayList<Character> ops) {
+    private Tree operatorParse(int opCharPosition, Tree opObj,
+                               ArrayList<Tree> trees, ArrayList<Character> ops) throws ParserParsingException{
 
         opObj.left = trees.get(opCharPosition);
         opObj.right = trees.get(opCharPosition + 1);
@@ -111,7 +118,7 @@ public class ExpressionsTreeParser {
 
     }
 
-    private Tree buildFromOneRang(int p, int q, OperationIndex[] ops) {
+    private Tree buildFromOneRang(int p, int q, OperationIndex[] ops) throws ParserParsingException {
 
         if (ops.length == 1) {
             Tree t = Tree.operationsFabric(expressionString[ops[0].i]);
@@ -143,8 +150,9 @@ public class ExpressionsTreeParser {
      * @param p begin position in expressionString
      * @param q after end position
      * @return Expression Tree
+     * @throws ParserParsingException if can't parse
      */
-    private Tree buildTree(int p, int q) {
+    private Tree buildTree(int p, int q) throws ParserParsingException {
 
         int i = p;
 

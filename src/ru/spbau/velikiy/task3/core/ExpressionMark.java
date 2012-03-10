@@ -12,15 +12,26 @@ package spbau.velikiy.task3.core;
 
 public class ExpressionMark {
 
-    public enum MarkType{
+    /**
+     * type of char in expression
+     */
+    public MarkType type;
+
+    /**
+     * specific value for each type
+     */
+    public int value;
+
+    /**
+     * expression mark types
+     */
+    public static enum MarkType{
         Bracket,
         Num,
         Var,
         BiOperation
     }
-
-    public MarkType type;
-    public int value;
+    
 
 }
 

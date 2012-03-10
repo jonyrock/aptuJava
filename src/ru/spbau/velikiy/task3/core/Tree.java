@@ -8,48 +8,52 @@ import spbau.velikiy.task3.core.operations.*;
  * http://msdn.microsoft.com/ru-ru/library/ms228600(v=vs.90).aspx
  *
  * @author Alexey Velikiy. APTU. Java. Homework 3.
- * @version %I%, %G% 
+ * @version %I%, %G%
  */
-public abstract class Tree implements ValueAble {
-    
+public abstract class Tree implements Evaluable {
+
     public Tree left;
     public Tree right;
 
-    /**    
+    /**
      * Get operation by operation char
-     * 
+     *
      * @param op operation char
      * @return operation or null if it is not exist
      */
-    public static Tree operationsFabric(char op){
-        
-        if(op == '+')
-            return new OperationPlus();
+    public static Tree operationsFabric(char op) {
 
-        if(op == '-')
-            return new OperationMinus();
+        switch (op) {
 
-        if(op == '/')
-            return new OperationDivision();
+            case '+':
+                return new OperationPlus();
 
-        if(op == '*')
-            return new OperationMultiplication();
+            case '-':
+                return new OperationMinus();
 
-        if(op == '@')
-            return new OperationApply();
-        
-        return null;
+            case '/':
+                return new OperationDivision();
+
+            case '*':
+                return new OperationMultiplication();
+
+            case '@':
+                return new OperationApply();
+
+            default:
+                return null;
+        }
 
     }
 
     /**
      * This method uses for retrieving additional information
      * about inner vars
-     * 
-     * @return name of 
+     *
+     * @return name of
      */
-    public String getVarName(){
+    public String getVarName() {
         throw new NullPointerException("Not implemented");
     }
-    
+
 }

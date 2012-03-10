@@ -16,18 +16,18 @@ public class OperationMinus extends Tree {
      * evaluate expression according to context
      *
      * @param context definitions of vars.
-     * @return constant calculateValue
+     * @return constant evaluate
      * @throws ParserEvaluationException if error is occurred 
      */
-    public int calculateValue(EvaluationContext context) throws ParserEvaluationException {
+    public int evaluate(EvaluationContext context) throws ParserEvaluationException {
 
         // if it is unary minus
         if (left == null) {
-            return -right.calculateValue(context);
+            return -right.evaluate(context);
         }
 
         // otherwise it is binary
-        return left.calculateValue(context) - right.calculateValue(context);
+        return left.evaluate(context) - right.evaluate(context);
 
     }
 
