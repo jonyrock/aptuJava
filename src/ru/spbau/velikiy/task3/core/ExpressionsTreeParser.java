@@ -1,7 +1,6 @@
 package spbau.velikiy.task3.core;
 
 import spbau.velikiy.task3.core.operations.*;
-import spbau.velikiy.task3.exceptions.ParserParsingException;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;

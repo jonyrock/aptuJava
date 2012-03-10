@@ -6,6 +6,13 @@ import spbau.velikiy.task3.exceptions.ParserEvaluationException;
 
 public class OperationDivision extends Tree {
 
+    /**
+     * evaluate expression according to context
+     *
+     * @param context definitions of vars.
+     * @return constant value
+     * @throws ParserEvaluationException if error is occurred
+     */
     public int value(EvaluationContext context) throws ParserEvaluationException {
 
         // lazy evaluation

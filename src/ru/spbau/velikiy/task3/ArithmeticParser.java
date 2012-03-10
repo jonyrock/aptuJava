@@ -21,7 +21,7 @@ public class ArithmeticParser extends ExpressionsTreeParser {
 
     /**
      * construct program structure from code
-     * @param programSource lines of expressions
+     * @param programSource expression in lines
      */
     public ArithmeticParser(String[] programSource) {
 
@@ -61,8 +61,7 @@ public class ArithmeticParser extends ExpressionsTreeParser {
      * 
      * @return integer value
      * @throws ParserEvaluationException if can't evaluate 
-     */
-    
+     */    
     public int evaluate() throws ParserEvaluationException {        
         return this.getRootTree().value(this.context);
     }

@@ -20,21 +20,26 @@ public class OperationConstant extends Tree {
         int parsedValue = 0;
 
         while (pointer < s.length) {
-            
+
             if (!Character.isDigit(s[pointer])) {
                 break;
             }
-            
+
             parsedValue = parsedValue * 10 + Character.digit(s[pointer], 10);
             pointer++;
-            
+
         }
-        
-        value = parsedValue;        
+
+        value = parsedValue;
 
     }
 
-
+    /**
+     * evaluate expression according to context
+     *
+     * @param context definitions of vars.
+     * @return constant value
+     */
     public int value(EvaluationContext context) {
 
         return value;

@@ -8,31 +8,50 @@ public class OperationVar extends Tree {
 
     public final String name;
 
+    /**
+     * Create var from source string expression
+     * and pointer in it
+     *
+     * @param s       source expression
+     * @param pointer position in expression
+     */
     public OperationVar(char[] s, int pointer) {
 
         StringBuilder builder = new StringBuilder();
 
         while (pointer < s.length) {
-            
-            if (!Character.isLetter(s[pointer])){
+
+            if (!Character.isLetter(s[pointer])) {
                 break;
             }
-            
+
             builder.append(s[pointer]);
             pointer++;
-            
+
         }
 
         name = builder.toString();
 
     }
 
-    public int value(EvaluationContext context) throws ParserEvaluationException{
+    /**
+     * evaluate expression according to context
+     *
+     * @param context definitions of vars.
+     * @return constant value
+     * @throws ParserEvaluationException if error is occurred
+     */
+    public int value(EvaluationContext context) throws ParserEvaluationException {
 
         return context.getVarValue(this.name);
 
     }
 
+    /**
+     * Return var name for using as function var
+     *
+     * @return var name
+     */
     @Override
     public String getVarName() {
         return this.name;
