@@ -6,8 +6,7 @@ package spbau.velikiy.task3.core;
 
 public interface ValueAble {
 
-    /**
-     * 
+    /**    
      * evaluate expression according to context
      * 
      * @param context definitions of vars
