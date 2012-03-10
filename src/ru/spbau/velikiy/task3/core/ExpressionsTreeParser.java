@@ -16,7 +16,10 @@ public class ExpressionsTreeParser {
 
     private static final Pattern applicationPattern = Pattern.compile("([a-zA-Z]+)\\(");
 
-    
+    /**
+     * build evaluation tree from source code
+     * @param expression source code line to build evaluation tree 
+     */
     public ExpressionsTreeParser(String expression) {
 
         String s = preprocessor(expression);
