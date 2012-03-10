@@ -5,15 +5,20 @@ import java.util.HashMap;
 
 public class EvaluationContext {
 
-    private HashMap<String, Tree> mapVars = new HashMap<String, Tree>();
-    private HashMap<String, Tree> mapFunctions = new HashMap<String, Tree>();
+    protected HashMap<String, Tree> mapVars = new HashMap<String, Tree>();
+    protected HashMap<String, FunctionArgumentTree> mapFunctions = 
+            new HashMap<String, FunctionArgumentTree>();
 
     public int getVarValue(String name) {
         return mapVars.get(name).value(this);
     }
 
     public int evalFunction(String name, int value) {
-        return 123;
+        FunctionArgumentTree item = mapFunctions.get(name);
+        
+        return item.tree.value(
+                new FunctionEvaluationContext(item.argumentName, 
+                        value, this));
     }
 
 
@@ -26,18 +31,45 @@ public class EvaluationContext {
         mapVars.put(varName, tree);
     }
 
-    public void addFunctionValue(String name, String argName, Tree expr) {
-
+    public void addFunctionValue(String name, String argName, Tree tree) {
+        mapFunctions.put(name, new FunctionArgumentTree(argName, tree));
     }
 
-    private class FunctionEvaluationContext extends EvaluationContext {
-
-        public FunctionEvaluationContext() {
+    private static class FunctionEvaluationContext extends EvaluationContext {
+        
+        public final int argumentValue;
+        public final String argumentName;
+        
+        public FunctionEvaluationContext(String argumentName, int argumentValue, 
+                                         EvaluationContext baseContext) {
+            
+            this.argumentName = argumentName;
+            this.argumentValue = argumentValue;
+            
+            super.mapFunctions = baseContext.mapFunctions;
+            super.mapVars = baseContext.mapVars;
             
         }
 
+        @Override
+        public int getVarValue(String name) {            
+            if(argumentName.equals(name)){
+                return argumentValue;
+            }            
+            return super.getVarValue(name);
+        }
     }
     
-    
+    private static class FunctionArgumentTree {
+        
+        public String argumentName;
+        public Tree tree;
+        
+        public FunctionArgumentTree(String argumentName, Tree tree){
+            this.argumentName = argumentName;
+            this.tree = tree;
+        }
+        
+    }
     
 }
