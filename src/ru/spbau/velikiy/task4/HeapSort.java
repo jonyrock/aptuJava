@@ -1,6 +1,7 @@
 package spbau.velikiy.task4;
 
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,34 +12,43 @@ public class HeapSort<T extends Comparable<T>> implements Sorter<T> {
 
     }
 
-    public void sort(final List<T> list, final Comparator<T> c) {
-
-        Collections.sort(list, new java.util.Comparator<T>() {
-            public int compare(T t, T t1) {
-                return c.compare(t, t1);
-            }
-        });
+    public void sort(final List<T> list, final Comparator<T> comparator) {
+                
+        Heap<T> heap = new Heap<T>(list.size(), comparator);
+        for (T t : list){
+            heap.add(t);
+        }
+        list.clear();
+        while (!heap.isEmpty()){
+            list.add(heap.pop());
+        }
 
     }
 
-    private static class Heap {
+    private static class Heap<T> {
 
-        public Pair[] data;
+        public ArrayList<T> data;
         public int topIndex = 0;
+        public final Comparator<T> comparator;
 
-        public Heap(int capacity) {
-            data = new Pair[capacity];
+        public Heap(int capacity, Comparator<T> comparator) {
+            data = new ArrayList<T>();
+            this.comparator = comparator;
         }
-
-        public void add(Pair n) {
-            data[topIndex] = n;
+        
+        public boolean isEmpty(){
+            return topIndex == 0;
+        }
+        
+        public void add(T n) {
+            data.add(n);
             heapify(topIndex);
             topIndex++;
         }
 
-        public Pair pop() {
-            Pair t = data[0];
-            data[0] = data[topIndex - 1];
+        public T pop() {
+            T t = data.get(0);
+            data.set(0, data.get(topIndex - 1));
             topIndex--;
             heapifyDown(0);
             return t;
@@ -49,8 +59,9 @@ public class HeapSort<T extends Comparable<T>> implements Sorter<T> {
             int p;
             while (i != 0) {
                 p = (i - 1) / 2;
-                if (data[p].l < data[i].l)
+                if (comparator.compare(data.get(p), data.get(i)) == 1) {
                     break;
+                }
                 swap(p, i);
                 i = p;
             }
@@ -67,18 +78,22 @@ public class HeapSort<T extends Comparable<T>> implements Sorter<T> {
                 int ci2 = ci1 + 1;
                 int mi;
 
-                if (ci1 >= topIndex)
+                if (ci1 >= topIndex) {
                     break;
+                }
 
-                if (ci2 >= topIndex)
+                if (ci2 >= topIndex) {
                     mi = ci1;
-                else
-                    mi = (data[ci1].l < data[ci2].l) ? ci1 : ci2;
+                } else {
+                    mi = (comparator.compare(data.get(ci1),
+                            data.get(ci2)) == 0) ? ci1 : ci2;
+                }
 
-                if (data[i].l > data[mi].l)
+                if (comparator.compare(data.get(i), data.get(mi)) == 0) {
                     swap(i, mi);
-                else
+                } else {
                     break;
+                }
 
                 i = mi;
 
@@ -89,41 +104,11 @@ public class HeapSort<T extends Comparable<T>> implements Sorter<T> {
         }
 
         void swap(int i, int j) {
-            Pair t = data[i];
-            data[i] = data[j];
-            data[j] = t;
+            T t = data.get(i);
+            data.set(i, data.get(j));
+            data.set(j, t);
         }
 
     }
 
-    private static class Pair {
-
-        public int l;
-        public int r;
-
-        public Pair(int l, int r) {
-            this.l = l;
-            this.r = r;
-        }
-
-        public static class ByLSort implements Comparator<Pair> {
-
-            public int compare(Pair one, Pair two) {
-
-                return (one.l > two.l) ? 1 : -1;
-
-            }
-        }
-
-        public static class ByRSort implements Comparator<Pair> {
-
-            public int compare(Pair one, Pair two) {
-
-                return (one.r > two.r) ? 1 : -1;
-
-            }
-        }
-
-    }
-    
 }
