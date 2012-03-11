@@ -86,7 +86,7 @@ public class HeapSort<T extends Comparable<T>> implements Sorter<T> {
                     mi = ci1;
                 } else {
                     mi = (comparator.compare(data.get(ci1),
-                            data.get(ci2)) == 0) ? ci1 : ci2;
+                            data.get(ci2)) == 1) ? ci1 : ci2;
                 }
 
                 if (comparator.compare(data.get(i), data.get(mi)) == 0) {

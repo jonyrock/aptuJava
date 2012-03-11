@@ -25,18 +25,38 @@ public class Main {
 
     }
 
+
+    // TODO abstract sorting, test correctness
     private static void integersTest() {
 
         List<ComparableInteger> list;
 
         // heaSort testing
         System.out.println("HeapSort testing:");
-        Sorter<ComparableInteger> sorter = new HeapSort<ComparableInteger>();
+        
+        Sorter<ComparableInteger> sorter = new ShakerSort<ComparableInteger>();
         list = new ArrayList<ComparableInteger>();
         List<Long> results = new ArrayList<Long>();
-        
+
+
         fillListIntegers(list, 10);
-        results.add(getTime(list, sorter, new IntegerModComparator(5)));
+
+        printList(list, true);
+        System.out.println("-----------------------");
+
+        results.add(getTime(list, sorter, new Comparator<ComparableInteger>() {
+            public int compare(ComparableInteger a, ComparableInteger b) {
+                return a.compareTo(b);
+            }
+        }
+        ));
+
+        printList(list, true);
+
+        if (1 < 2) {
+            return;
+        }
+
 
         fillListIntegers(list, 100);
         results.add(getTime(list, sorter, new IntegerModComparator(7)));
@@ -46,7 +66,7 @@ public class Main {
 
         fillListIntegers(list, 10000);
         results.add(getTime(list, sorter, new IntegerModComparator(8)));
-        
+
         System.out.println("10\t\t100\t\t1000\t10000");
         for (Long res : results) {
             System.out.print(res + "ms\t\t");
@@ -64,7 +84,7 @@ public class Main {
         sorter.sort(list, new StringLengthComparator());
 
 
-        printList(list);
+        printList(list, true);
 
     }
 
@@ -97,10 +117,14 @@ public class Main {
 
     }
 
-    private static <T> void printList(List<T> list) {
+    private static <T> void printList(List<T> list, boolean inline) {
 
         for (T item : list) {
-            System.out.println(item);
+            if (inline) {
+                System.out.print(item + " ");
+            } else {
+                System.out.println(item);
+            }
         }
 
         System.out.println();
