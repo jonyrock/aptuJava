@@ -19,16 +19,35 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        //stringsTest();
+        integersTest();
+
+    }
+    
+    private static void integersTest(){
+        
         List<ComparableInteger> list = new ArrayList<ComparableInteger>();
-        fillList(list, 10);
+        fillListIntegers(list, 10);
         Sorter<ComparableInteger> sorter = new HeapSort<ComparableInteger>();
         sorter.sort(list, new IntegerModComparator(10));
+
+        printList(list);
         
+    }
+
+    private static void stringsTest(){
+
+        List<ComparableString> list = new ArrayList<ComparableString>();
+        fillListStrings(list, 10, 20);
+        Sorter<ComparableString> sorter = new HeapSort<ComparableString>();
+        sorter.sort(list, new StringLengthComparator());
+
         printList(list);
 
     }
 
-    private static void fillList(List<ComparableInteger> list, int count) {
+
+    private static void fillListIntegers(List<ComparableInteger> list, int count) {
 
 
         for (int i = 0; i < count; i++) {
@@ -38,14 +57,32 @@ public class Main {
 
     }
 
-    private static void printList(List<ComparableInteger> list) {
+    private static void fillListStrings(List<ComparableString> list, int count, int length) {
 
-        for (ComparableInteger item : list) {
-            System.out.print(item.value + " ");
+        StringBuilder builder = new StringBuilder();
+        int range = 'z' - 'a';
+        
+
+        for (int i = 0; i < count; i++) {
+            builder = new StringBuilder();
+            int lengthRandom = (int) (Math.random() * length) + 3;
+            for (int j = 0; j < lengthRandom; j++) {
+                builder.append((char) ('a' + (int) (Math.random() * range)));
+            }
+            list.add(new ComparableString(builder.toString()));
+        }
+
+    }
+
+    private static<T> void printList(List<T> list) {
+
+        for (T item : list) {
+            System.out.println(item);
         }
 
         System.out.println();
 
     }
+   
 
 }

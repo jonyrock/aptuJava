@@ -12,4 +12,10 @@ public class ComparableInteger implements Comparable<ComparableInteger> {
     public int compareTo(ComparableInteger x) {
         return (value >= x.value) ? 1 : 0;
     }
+
+    @Override
+    public String toString() {
+        return this.value + "";
+    }
+
 }
