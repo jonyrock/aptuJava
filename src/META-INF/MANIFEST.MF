@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: spbau.velikiy.task2.Main
+Main-Class: spbau.velikiy.task3.Main
 

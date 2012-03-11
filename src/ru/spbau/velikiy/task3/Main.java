@@ -16,7 +16,6 @@ import java.util.ArrayList;
  * @author Alexey Velikiy. APTU. Java. Homework 3.
  * @version %I%, %G%
  */
-
 public class Main {
 
     /**
@@ -28,7 +27,7 @@ public class Main {
 
         if (args.length == 0) {
             System.out.println("Need input file path.");
-            System.exit(1);
+            return;
         }
 
         String[] sourceLines = getSourceLines(args[0]);
