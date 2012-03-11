@@ -8,7 +8,12 @@ import java.util.List;
 public class HeapSort<T extends Comparable<T>> implements Sorter<T> {
 
     public void sort(List<T> list) {
-
+        
+        this.sort(list, new Comparator<T>() {
+            public int compare(T a, T b) {
+                return a.compareTo(b);
+            }
+        });
 
     }
 
@@ -111,4 +116,8 @@ public class HeapSort<T extends Comparable<T>> implements Sorter<T> {
 
     }
 
+    @Override
+    public String toString() {
+        return "HeapSort";
+    }
 }

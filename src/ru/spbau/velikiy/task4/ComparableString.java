@@ -10,7 +10,7 @@ public class ComparableString implements Comparable<ComparableString> {
     }
 
     public int compareTo(ComparableString x) {
-        return value.compareTo(x.value);
+        return value.compareTo(x.value) >= 0 ? 0 : 1;
     }
 
 

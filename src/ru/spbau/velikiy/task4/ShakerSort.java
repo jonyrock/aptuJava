@@ -56,4 +56,9 @@ public class ShakerSort<T extends Comparable<T>> implements Sorter<T> {
         data.set(j, t);
     }
 
+    @Override
+    public String toString() {
+        return "ShakerSort";
+    }
+    
 }

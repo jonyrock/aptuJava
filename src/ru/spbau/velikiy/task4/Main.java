@@ -20,75 +20,172 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        //stringsTest();
-        integersTest();
-
+        System.out.println("HeapSort testing");
+        System.out.println("------------------------------------------");
+        integersTest(new HeapSort<ComparableInteger>());
+        System.out.println();
+        integersTestWithComparators(new HeapSort<ComparableInteger>());
+        System.out.println();
+        stringsTest(new HeapSort<ComparableString>());
+        System.out.println();
+        stringsTestWithComparators(new HeapSort<ComparableString>());
+        
+        System.out.println("ShakerSort testing");
+        System.out.println("------------------------------------------");
+        integersTest(new ShakerSort<ComparableInteger>());
+        System.out.println();
+        integersTestWithComparators(new ShakerSort<ComparableInteger>());
+        System.out.println();
+        stringsTest(new ShakerSort<ComparableString>());
+        System.out.println();
+        stringsTestWithComparators(new ShakerSort<ComparableString>());
+        
     }
 
+    
+    private static void integersTest(Sorter<ComparableInteger> sorter) {
 
-    // TODO abstract sorting, test correctness
-    private static void integersTest() {
-
-        List<ComparableInteger> list;
-
-        // heaSort testing
-        System.out.println("HeapSort testing:");
-
-        Sorter<ComparableInteger> sorter = new ShakerSort<ComparableInteger>();
-        list = new ArrayList<ComparableInteger>();
+        System.out.println("ComparableInteger tests");
+        
+        // preparing computation structures
+        List<ComparableInteger> list = new ArrayList<ComparableInteger>();
         List<Long> results = new ArrayList<Long>();
 
-
+        // checking correctness and save statistics
         fillListIntegers(list, 10);
-
+        System.out.println("Checking correctness");
+        System.out.print("Source list: ");
         printList(list, true);
-        System.out.println("-----------------------");
-
-        results.add(getTime(list, sorter,
-                new Comparator<ComparableInteger>() {
-                    public int compare(ComparableInteger a, ComparableInteger b) {
-                        return a.compareTo(b);
-                    }
-                }
-        ));
-
-        printList(list, true);
-
-        if (1 < 2) {
-            return;
-        }
-
-
+        results.add(getTime(list, sorter));
+        System.out.print("Sorted list: ");
+        printList(list, true);        
+        
+        // collect statistics
+        System.out.println("Executing bigger test (without comparator):");
         fillListIntegers(list, 100);
-        results.add(getTime(list, sorter, new IntegerModComparator(7)));
-
+        results.add(getTime(list, sorter));
         fillListIntegers(list, 1000);
-        results.add(getTime(list, sorter, new IntegerModComparator(7)));
-
+        results.add(getTime(list, sorter));
         fillListIntegers(list, 10000);
-        results.add(getTime(list, sorter, new IntegerModComparator(8)));
+        results.add(getTime(list, sorter));
+        System.out.println("10 \t\t100  \t\t1000\t\t10000");
+        for (Long res : results) {
+            System.out.print(res + "ms\t\t");
+        }
+        System.out.println();
+                       
+    }
 
-        System.out.println("10\t\t100\t\t1000\t10000");
+    private static void integersTestWithComparators(Sorter<ComparableInteger> sorter) {
+
+        System.out.println("ComparableInteger tests with comparators");
+        System.out.println("using IntegerModComparator(10)");
+
+        // preparing computation structures
+        List<ComparableInteger> list = new ArrayList<ComparableInteger>();
+        List<Long> results = new ArrayList<Long>();
+        Comparator<ComparableInteger> comparator = new IntegerModComparator(10);
+        
+        // checking correctness and save statistics
+        fillListIntegers(list, 10);
+        System.out.println("Checking correctness");
+        System.out.print("Source list: ");
+        printList(list, true);
+        results.add(getTime(list, sorter, comparator));
+        System.out.print("Sorted list: ");
+        printList(list, true);
+
+        // collect statistics
+        System.out.println("Executing bigger test:");
+        fillListIntegers(list, 100);
+        results.add(getTime(list, sorter, comparator));
+        fillListIntegers(list, 1000);
+        results.add(getTime(list, sorter, comparator));
+        fillListIntegers(list, 10000);
+        results.add(getTime(list, sorter, comparator));
+        System.out.println("10 \t\t100  \t\t1000\t\t10000");
         for (Long res : results) {
             System.out.print(res + "ms\t\t");
         }
         System.out.println();
 
-
     }
+    
+    private static void stringsTest(Sorter<ComparableString> sorter) {
 
-    private static void stringsTest() {
+        System.out.println("ComparableString tests");
 
+        // preparing computation structures
         List<ComparableString> list = new ArrayList<ComparableString>();
-        fillListStrings(list, 10, 20);
-        Sorter<ComparableString> sorter = new HeapSort<ComparableString>();
-        sorter.sort(list, new StringLengthComparator());
+        List<Long> results = new ArrayList<Long>();
 
+        // checking correctness and save statistics
+        fillListStrings(list, 10, 10);
+        System.out.println("Checking correctness");
+        System.out.println("Source list: ");
+        printList(list, false);
+        results.add(getTime(list, sorter));
+        System.out.println("Sorted list: ");
+        printList(list, false);
 
-        printList(list, true);
-
+        // collect statistics
+        System.out.println("Executing bigger test (without comparator):");
+        fillListStrings(list, 100, 10);
+        results.add(getTime(list, sorter));
+        fillListStrings(list, 1000, 10);
+        results.add(getTime(list, sorter));
+        fillListStrings(list, 10000, 10);
+        results.add(getTime(list, sorter));
+        System.out.println("10 \t\t100  \t\t1000\t\t10000");
+        for (Long res : results) {
+            System.out.print(res + "ms\t\t");
+        }
+        System.out.println();
     }
 
+    private static void stringsTestWithComparators(Sorter<ComparableString> sorter) {
+
+        System.out.println("ComparableString tests with comparators");
+        System.out.println("using StringLengthComparator");
+
+        // preparing computation structures
+        List<ComparableString> list = new ArrayList<ComparableString>();
+        List<Long> results = new ArrayList<Long>();
+        Comparator<ComparableString> comparator = new StringLengthComparator();
+
+        // checking correctness and save statistics
+        fillListStrings(list, 10, 10);
+        System.out.println("Checking correctness");
+        System.out.println("Source list: ");
+        printList(list, false);
+        results.add(getTime(list, sorter, comparator));
+        System.out.println("Sorted list: ");
+        printList(list, false);
+
+        // collect statistics
+        System.out.println("Executing bigger test:");
+        fillListStrings(list, 100, 10);
+        results.add(getTime(list, sorter, comparator));
+        fillListStrings(list, 1000, 10);
+        results.add(getTime(list, sorter, comparator));
+        fillListStrings(list, 10000, 10);
+        results.add(getTime(list, sorter, comparator));
+        System.out.println("10 \t\t100  \t\t1000\t\t10000");
+        for (Long res : results) {
+            System.out.print(res + "ms\t\t");
+        }
+        System.out.println();
+    }
+
+
+    private static void sorterTest(Sorter sorter) {
+        
+        System.out.println("Testing for " + sorter.toString());
+        System.out.println("-------------------------------------------------");
+        integersTest(sorter);
+
+
+    }
 
     private static void fillListIntegers(List<ComparableInteger> list, int count) {
 
