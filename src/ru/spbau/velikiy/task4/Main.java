@@ -1,6 +1,7 @@
 package spbau.velikiy.task4;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,24 +24,45 @@ public class Main {
         integersTest();
 
     }
-    
-    private static void integersTest(){
-        
-        List<ComparableInteger> list = new ArrayList<ComparableInteger>();
-        fillListIntegers(list, 10);
-        Sorter<ComparableInteger> sorter = new HeapSort<ComparableInteger>();
-        sorter.sort(list, new IntegerModComparator(10));
 
-        printList(list);
+    private static void integersTest() {
+
+        List<ComparableInteger> list;
+
+        // heaSort testing
+        System.out.println("HeapSort testing:");
+        Sorter<ComparableInteger> sorter = new HeapSort<ComparableInteger>();
+        list = new ArrayList<ComparableInteger>();
+        List<Long> results = new ArrayList<Long>();
         
+        fillListIntegers(list, 10);
+        results.add(getTime(list, sorter, new IntegerModComparator(5)));
+
+        fillListIntegers(list, 100);
+        results.add(getTime(list, sorter, new IntegerModComparator(7)));
+
+        fillListIntegers(list, 1000);
+        results.add(getTime(list, sorter, new IntegerModComparator(7)));
+
+        fillListIntegers(list, 10000);
+        results.add(getTime(list, sorter, new IntegerModComparator(8)));
+        
+        System.out.println("10\t\t100\t\t1000\t10000");
+        for (Long res : results) {
+            System.out.print(res + "ms\t\t");
+        }
+        System.out.println();
+
+
     }
 
-    private static void stringsTest(){
+    private static void stringsTest() {
 
         List<ComparableString> list = new ArrayList<ComparableString>();
         fillListStrings(list, 10, 20);
         Sorter<ComparableString> sorter = new HeapSort<ComparableString>();
         sorter.sort(list, new StringLengthComparator());
+
 
         printList(list);
 
@@ -49,7 +71,7 @@ public class Main {
 
     private static void fillListIntegers(List<ComparableInteger> list, int count) {
 
-
+        list.clear();
         for (int i = 0; i < count; i++) {
             list.add(new ComparableInteger(
                     (int) (Math.random() * 1000)));
@@ -59,9 +81,10 @@ public class Main {
 
     private static void fillListStrings(List<ComparableString> list, int count, int length) {
 
+        list.clear();
+
         StringBuilder builder = new StringBuilder();
         int range = 'z' - 'a';
-        
 
         for (int i = 0; i < count; i++) {
             builder = new StringBuilder();
@@ -74,7 +97,7 @@ public class Main {
 
     }
 
-    private static<T> void printList(List<T> list) {
+    private static <T> void printList(List<T> list) {
 
         for (T item : list) {
             System.out.println(item);
@@ -83,6 +106,17 @@ public class Main {
         System.out.println();
 
     }
-   
+
+    private static <T> long getTime(List<T> list, Sorter<T> sorter) {
+        Date startDate = new Date();
+        sorter.sort(list);
+        return new Date().getTime() - startDate.getTime();
+    }
+
+    private static <T> long getTime(List<T> list, Sorter<T> sorter, Comparator<T> comparator) {
+        Date startDate = new Date();
+        sorter.sort(list, comparator);
+        return new Date().getTime() - startDate.getTime();
+    }
 
 }
