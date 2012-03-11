@@ -20,25 +20,33 @@ public class ShakerSort<T extends Comparable<T>> implements Sorter<T> {
 
         ArrayList<T> data = new ArrayList<T>(list);
 
-        for (int p = 1; p <= data.size() / 2; p++) {
 
-            // first do left to right bubbling pass
-            for (int i = p - 1; i < data.size() - p; i++) {
+        int a;
+        boolean exchange;
+        char t;
+        int count = data.size();
 
-                if (comparator.compare(data.get(i), data.get(i + 1)) == 1) {
-                    swap(data, i, i + 1);
+        do {
+            
+            exchange = false;
+            
+            for (a = count - 1; a > 0; --a) {
+                if (comparator.compare(data.get(a - 1), data.get(a)) == 0) {
+                    swap(data, a - 1, a);
+                    exchange = true;
                 }
             }
-
-            // now do right to left bubbling pass
-            for (int i = data.size() - p - 1; i >= p; i--) {
-                if (comparator.compare(data.get(i), data.get(i + 1)) != 1) {
-                    swap(data, i, i - 1);
+            
+            for (a = 1; a < count; ++a) {
+                if (comparator.compare(data.get(a - 1), data.get(a)) == 0) {
+                    swap(data, a - 1, a);
+                    exchange = true;
                 }
             }
+            
+        } while (exchange);
 
-        }
-        
+
         list.clear();
         list.addAll(data);
 
