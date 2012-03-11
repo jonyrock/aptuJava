@@ -2,17 +2,16 @@ package spbau.velikiy.task4;
 
 
 // TODO comment
-public class IntegerModComparator extends ComparableInteger {
+public class IntegerModComparator implements Comparator<ComparableInteger> {
 
     public final int n;
 
-    public IntegerModComparator(int n, int value) {
-        super(value);
+    public IntegerModComparator(int n) {
         this.n = n;
     }
 
-    @Override
-    public int compareTo(ComparableInteger x) {
-        return (value % n >= x.value % n) ? 1 : 0;
+    public int compare(ComparableInteger a, ComparableInteger b) {
+        return (a.value % n >= b.value % n) ? 1 : 0;
     }
+
 }

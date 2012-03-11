@@ -22,14 +22,15 @@ public class Main {
         List<ComparableInteger> list = new ArrayList<ComparableInteger>();
         fillList(list, 10);
         Sorter<ComparableInteger> sorter = new HeapSort<ComparableInteger>();
-        //sorter.sort(list);
-        printList(list);
+        sorter.sort(list, new IntegerModComparator(10));
         
+        printList(list);
+
     }
 
     private static void fillList(List<ComparableInteger> list, int count) {
 
-        
+
         for (int i = 0; i < count; i++) {
             list.add(new ComparableInteger(
                     (int) (Math.random() * 1000)));
@@ -38,13 +39,13 @@ public class Main {
     }
 
     private static void printList(List<ComparableInteger> list) {
-        
+
         for (ComparableInteger item : list) {
             System.out.print(item.value + " ");
         }
-        
+
         System.out.println();
-        
+
     }
 
 }
