@@ -33,7 +33,7 @@ public class Main {
 
         // heaSort testing
         System.out.println("HeapSort testing:");
-        
+
         Sorter<ComparableInteger> sorter = new ShakerSort<ComparableInteger>();
         list = new ArrayList<ComparableInteger>();
         List<Long> results = new ArrayList<Long>();
@@ -44,11 +44,12 @@ public class Main {
         printList(list, true);
         System.out.println("-----------------------");
 
-        results.add(getTime(list, sorter, new Comparator<ComparableInteger>() {
-            public int compare(ComparableInteger a, ComparableInteger b) {
-                return a.compareTo(b);
-            }
-        }
+        results.add(getTime(list, sorter,
+                new Comparator<ComparableInteger>() {
+                    public int compare(ComparableInteger a, ComparableInteger b) {
+                        return a.compareTo(b);
+                    }
+                }
         ));
 
         printList(list, true);

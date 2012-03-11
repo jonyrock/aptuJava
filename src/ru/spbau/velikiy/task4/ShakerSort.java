@@ -20,10 +20,8 @@ public class ShakerSort<T extends Comparable<T>> implements Sorter<T> {
 
         ArrayList<T> data = new ArrayList<T>(list);
 
-
         int a;
-        boolean exchange;
-        char t;
+        boolean exchange;        
         int count = data.size();
 
         do {
@@ -51,7 +49,6 @@ public class ShakerSort<T extends Comparable<T>> implements Sorter<T> {
         list.addAll(data);
 
     }
-
 
     private void swap(ArrayList<T> data, int i, int j) {
         T t = data.get(i);
