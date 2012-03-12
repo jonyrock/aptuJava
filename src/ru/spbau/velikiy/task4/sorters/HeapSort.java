@@ -2,12 +2,23 @@ package spbau.velikiy.task4.sorters;
 
 
 import spbau.velikiy.task4.core.*;
+import spbau.velikiy.task4.core.Comparable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HeapSort<T extends spbau.velikiy.task4.core.Comparable<T>> implements Sorter<T> {
+/**
+ * Sorting on heap
+ *
+ * @author Alexey Velikiy. APTU. Java. Homework 4.
+ * @version %I%, %G%
+ */
+public class HeapSort<T extends Comparable<T>> implements Sorter<T> {
 
+    /**
+     * sorts elements in list with comparable objects 
+     * @param list for sorting
+     */
     public void sort(List<T> list) {
         
         this.sort(list, new Comparator<T>() {
@@ -18,6 +29,10 @@ public class HeapSort<T extends spbau.velikiy.task4.core.Comparable<T>> implemen
 
     }
 
+    /**
+     * sorts elements in list with comparable objects 
+     * @param list for sorting
+     */
     public void sort(final List<T> list, final Comparator<T> comparator) {
                 
         Heap<T> heap = new Heap<T>(list.size(), comparator);
@@ -38,7 +53,7 @@ public class HeapSort<T extends spbau.velikiy.task4.core.Comparable<T>> implemen
         public final Comparator<T> comparator;
 
         public Heap(int capacity, Comparator<T> comparator) {
-            data = new ArrayList<T>();
+            data = new ArrayList<T>(capacity);
             this.comparator = comparator;
         }
         
@@ -117,8 +132,4 @@ public class HeapSort<T extends spbau.velikiy.task4.core.Comparable<T>> implemen
 
     }
 
-    @Override
-    public String toString() {
-        return "HeapSort";
-    }
 }

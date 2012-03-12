@@ -2,8 +2,8 @@ package spbau.velikiy.task4.types;
 
 /**
  * Type with integer inside
- * 
- * @author Alexey Velikiy. APTU. Java. Homework 3.
+ *
+ * @author Alexey Velikiy. APTU. Java. Homework 4.
  * @version %I%, %G%
  */
 public class ComparableInteger implements spbau.velikiy.task4.core.Comparable<ComparableInteger> {
@@ -14,7 +14,8 @@ public class ComparableInteger implements spbau.velikiy.task4.core.Comparable<Co
     public final int value;
 
     /**
-     * Create by integer value
+     * Create from integer value
+     *
      * @param value inner value
      */
     public ComparableInteger(int value) {
@@ -23,6 +24,7 @@ public class ComparableInteger implements spbau.velikiy.task4.core.Comparable<Co
 
     /**
      * natural comparing
+     *
      * @param x another object
      * @return 1 if a >= x and 0 otherwise
      */
@@ -32,6 +34,7 @@ public class ComparableInteger implements spbau.velikiy.task4.core.Comparable<Co
 
     /**
      * get string representation
+     *
      * @return real value as string
      */
     @Override

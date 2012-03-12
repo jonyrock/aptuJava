@@ -2,6 +2,7 @@ package spbau.velikiy.task4;
 
 import spbau.velikiy.task4.comparators.IntegerModComparator;
 import spbau.velikiy.task4.comparators.StringLengthComparator;
+import spbau.velikiy.task4.core.Comparable;
 import spbau.velikiy.task4.core.Comparator;
 import spbau.velikiy.task4.core.Sorter;
 import spbau.velikiy.task4.sorters.HeapSort;
@@ -17,7 +18,7 @@ import java.util.List;
  * Arithmetic Parser. With functions definitions.
  * Start point
  *
- * @author Alexey Velikiy. APTU. Java. Homework 3.
+ * @author Alexey Velikiy. APTU. Java. Homework 4.
  * @version %I%, %G%
  */
 public class Main {
@@ -25,7 +26,7 @@ public class Main {
     /**
      * Start point
      *
-     * @param args program source path
+     * @param args program source path (not real using)
      */
     public static void main(String[] args) {
 
@@ -38,7 +39,7 @@ public class Main {
         stringsTest(new HeapSort<ComparableString>());
         System.out.println();
         stringsTestWithComparators(new HeapSort<ComparableString>());
-        
+
         System.out.println("ShakerSort testing");
         System.out.println("------------------------------------------");
         integersTest(new ShakerSort<ComparableInteger>());
@@ -48,14 +49,14 @@ public class Main {
         stringsTest(new ShakerSort<ComparableString>());
         System.out.println();
         stringsTestWithComparators(new ShakerSort<ComparableString>());
-        
+
     }
 
-    
+
     private static void integersTest(Sorter<ComparableInteger> sorter) {
 
         System.out.println("ComparableInteger tests");
-        
+
         // preparing computation structures
         List<ComparableInteger> list = new ArrayList<ComparableInteger>();
         List<Long> results = new ArrayList<Long>();
@@ -67,8 +68,8 @@ public class Main {
         printList(list, true);
         results.add(getTime(list, sorter));
         System.out.print("Sorted list: ");
-        printList(list, true);        
-        
+        printList(list, true);
+
         // collect statistics
         System.out.println("Executing bigger test (without comparator):");
         fillListIntegers(list, 100);
@@ -82,7 +83,7 @@ public class Main {
             System.out.print(res + "ms\t\t");
         }
         System.out.println();
-                       
+
     }
 
     private static void integersTestWithComparators(Sorter<ComparableInteger> sorter) {
@@ -94,7 +95,7 @@ public class Main {
         List<ComparableInteger> list = new ArrayList<ComparableInteger>();
         List<Long> results = new ArrayList<Long>();
         Comparator<ComparableInteger> comparator = new IntegerModComparator(10);
-        
+
         // checking correctness and save statistics
         fillListIntegers(list, 10);
         System.out.println("Checking correctness");
@@ -119,7 +120,7 @@ public class Main {
         System.out.println();
 
     }
-    
+
     private static void stringsTest(Sorter<ComparableString> sorter) {
 
         System.out.println("ComparableString tests");
@@ -200,7 +201,7 @@ public class Main {
 
         list.clear();
 
-        StringBuilder builder = new StringBuilder();
+        StringBuilder builder;
         int range = 'z' - 'a';
 
         for (int i = 0; i < count; i++) {
@@ -228,13 +229,14 @@ public class Main {
 
     }
 
-    private static <T> long getTime(List<T> list, Sorter<T> sorter) {
+    private static <T extends Comparable> long getTime(List<T> list, Sorter<T> sorter) {
         Date startDate = new Date();
         sorter.sort(list);
         return new Date().getTime() - startDate.getTime();
     }
 
-    private static <T> long getTime(List<T> list, Sorter<T> sorter, Comparator<T> comparator) {
+    private static <T extends Comparable> long getTime(List<T> list, Sorter<T> sorter,
+                                                       Comparator<T> comparator) {
         Date startDate = new Date();
         sorter.sort(list, comparator);
         return new Date().getTime() - startDate.getTime();

@@ -6,8 +6,18 @@ import spbau.velikiy.task4.core.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Sorting with shakeSort algorithm 
+ *
+ * @author Alexey Velikiy. APTU. Java. Homework 4.
+ * @version %I%, %G%
+ */
 public class ShakerSort<T extends spbau.velikiy.task4.core.Comparable<T>> implements Sorter<T> {
 
+    /**
+     * sorts elements in list with comparable objects 
+     * @param list for sorting
+     */
     public void sort(List<T> list) {
 
         this.sort(list, new Comparator<T>() {
@@ -18,6 +28,10 @@ public class ShakerSort<T extends spbau.velikiy.task4.core.Comparable<T>> implem
 
     }
 
+    /**
+     * sorts elements in list with comparable objects 
+     * @param list for sorting
+     */
     public void sort(List<T> list, Comparator<T> comparator) {
 
         ArrayList<T> data = new ArrayList<T>(list);
@@ -58,9 +72,4 @@ public class ShakerSort<T extends spbau.velikiy.task4.core.Comparable<T>> implem
         data.set(j, t);
     }
 
-    @Override
-    public String toString() {
-        return "ShakerSort";
-    }
-    
 }
