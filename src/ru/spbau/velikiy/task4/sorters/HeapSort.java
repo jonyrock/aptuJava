@@ -20,6 +20,7 @@ public class HeapSort implements Sorter {
      * sorts elements in list with comparable objects
      *
      * @param list for sorting
+     * @param <T> type
      */
     public <T extends Comparable<T>> void sort(List<T> list) {
 
@@ -35,6 +36,7 @@ public class HeapSort implements Sorter {
      * sorts elements in list with comparable objects
      *
      * @param list for sorting
+     * @param <T> type
      */
     public <T> void sort(final List<T> list, final Comparator<T> comparator) {
 

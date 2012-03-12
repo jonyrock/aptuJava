@@ -29,7 +29,7 @@ public class Main {
      * @param args program source path (not real using)
      */
     public static void main(String[] args) {
-                       
+
         System.out.println("HeapSort testing");
         System.out.println("------------------------------------------");
         integersTest(new HeapSort());
@@ -221,7 +221,7 @@ public class Main {
      * @param inline new lines after elem
      * @param <T> type in list
      */
-    public static <T> void printList(List<T> list, boolean inline) {
+    private static <T> void printList(List<T> list, boolean inline) {
 
         for (T item : list) {
             if (inline) {
