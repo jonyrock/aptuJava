@@ -1,8 +1,9 @@
 package spbau.velikiy.task4.sorters;
 
 
-import spbau.velikiy.task4.core.*;
 import spbau.velikiy.task4.core.Comparable;
+import spbau.velikiy.task4.core.Comparator;
+import spbau.velikiy.task4.core.Sorter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,14 +14,15 @@ import java.util.List;
  * @author Alexey Velikiy. APTU. Java. Homework 4.
  * @version %I%, %G%
  */
-public class HeapSort<T extends Comparable<T>> implements Sorter<T> {
+public class HeapSort implements Sorter {
 
     /**
-     * sorts elements in list with comparable objects 
+     * sorts elements in list with comparable objects
+     *
      * @param list for sorting
      */
-    public void sort(List<T> list) {
-        
+    public <T extends Comparable<T>> void sort(List<T> list) {
+
         this.sort(list, new Comparator<T>() {
             public int compare(T a, T b) {
                 return a.compareTo(b);
@@ -30,17 +32,18 @@ public class HeapSort<T extends Comparable<T>> implements Sorter<T> {
     }
 
     /**
-     * sorts elements in list with comparable objects 
+     * sorts elements in list with comparable objects
+     *
      * @param list for sorting
      */
-    public void sort(final List<T> list, final Comparator<T> comparator) {
-                
+    public <T> void sort(final List<T> list, final Comparator<T> comparator) {
+
         Heap<T> heap = new Heap<T>(list.size(), comparator);
-        for (T t : list){
+        for (T t : list) {
             heap.add(t);
         }
         list.clear();
-        while (!heap.isEmpty()){
+        while (!heap.isEmpty()) {
             list.add(heap.pop());
         }
 
@@ -56,11 +59,11 @@ public class HeapSort<T extends Comparable<T>> implements Sorter<T> {
             data = new ArrayList<T>(capacity);
             this.comparator = comparator;
         }
-        
-        public boolean isEmpty(){
+
+        public boolean isEmpty() {
             return topIndex == 0;
         }
-        
+
         public void add(T n) {
             data.add(n);
             heapify(topIndex);
@@ -131,5 +134,6 @@ public class HeapSort<T extends Comparable<T>> implements Sorter<T> {
         }
 
     }
+
 
 }

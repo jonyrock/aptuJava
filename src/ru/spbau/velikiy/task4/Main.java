@@ -22,38 +22,38 @@ import java.util.List;
  * @version %I%, %G%
  */
 public class Main {
-
+           
     /**
      * Start point
      *
      * @param args program source path (not real using)
      */
     public static void main(String[] args) {
-
+                       
         System.out.println("HeapSort testing");
         System.out.println("------------------------------------------");
-        integersTest(new HeapSort<ComparableInteger>());
+        integersTest(new HeapSort());
         System.out.println();
-        integersTestWithComparators(new HeapSort<ComparableInteger>());
+        integersTestWithComparators(new HeapSort());
         System.out.println();
-        stringsTest(new HeapSort<ComparableString>());
+        stringsTest(new HeapSort());
         System.out.println();
-        stringsTestWithComparators(new HeapSort<ComparableString>());
+        stringsTestWithComparators(new HeapSort());
 
         System.out.println("ShakerSort testing");
         System.out.println("------------------------------------------");
-        integersTest(new ShakerSort<ComparableInteger>());
+        integersTest(new ShakerSort());
         System.out.println();
-        integersTestWithComparators(new ShakerSort<ComparableInteger>());
+        integersTestWithComparators(new ShakerSort());
         System.out.println();
-        stringsTest(new ShakerSort<ComparableString>());
+        stringsTest(new ShakerSort());
         System.out.println();
-        stringsTestWithComparators(new ShakerSort<ComparableString>());
+        stringsTestWithComparators(new ShakerSort());
 
     }
 
 
-    private static void integersTest(Sorter<ComparableInteger> sorter) {
+    private static void integersTest(Sorter sorter) {
 
         System.out.println("ComparableInteger tests");
 
@@ -86,7 +86,7 @@ public class Main {
 
     }
 
-    private static void integersTestWithComparators(Sorter<ComparableInteger> sorter) {
+    private static void integersTestWithComparators(Sorter sorter) {
 
         System.out.println("ComparableInteger tests with comparators");
         System.out.println("using IntegerModComparator(10)");
@@ -121,7 +121,7 @@ public class Main {
 
     }
 
-    private static void stringsTest(Sorter<ComparableString> sorter) {
+    private static void stringsTest(Sorter sorter) {
 
         System.out.println("ComparableString tests");
 
@@ -153,7 +153,7 @@ public class Main {
         System.out.println();
     }
 
-    private static void stringsTestWithComparators(Sorter<ComparableString> sorter) {
+    private static void stringsTestWithComparators(Sorter sorter) {
 
         System.out.println("ComparableString tests with comparators");
         System.out.println("using StringLengthComparator");
@@ -215,7 +215,13 @@ public class Main {
 
     }
 
-    private static <T> void printList(List<T> list, boolean inline) {
+    /**
+     * Print list 
+     * @param list to print
+     * @param inline new lines after elem
+     * @param <T> type in list
+     */
+    public static <T> void printList(List<T> list, boolean inline) {
 
         for (T item : list) {
             if (inline) {
@@ -229,13 +235,13 @@ public class Main {
 
     }
 
-    private static <T extends Comparable> long getTime(List<T> list, Sorter<T> sorter) {
+    private static <T extends Comparable> long getTime(List<T> list, Sorter sorter) {
         Date startDate = new Date();
         sorter.sort(list);
         return new Date().getTime() - startDate.getTime();
     }
 
-    private static <T extends Comparable> long getTime(List<T> list, Sorter<T> sorter,
+    private static <T extends Comparable> long getTime(List<T> list, Sorter sorter,
                                                        Comparator<T> comparator) {
         Date startDate = new Date();
         sorter.sort(list, comparator);
