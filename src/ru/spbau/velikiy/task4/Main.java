@@ -1,5 +1,14 @@
 package spbau.velikiy.task4;
 
+import spbau.velikiy.task4.comparators.IntegerModComparator;
+import spbau.velikiy.task4.comparators.StringLengthComparator;
+import spbau.velikiy.task4.core.Comparator;
+import spbau.velikiy.task4.core.Sorter;
+import spbau.velikiy.task4.sorters.HeapSort;
+import spbau.velikiy.task4.sorters.ShakerSort;
+import spbau.velikiy.task4.types.ComparableInteger;
+import spbau.velikiy.task4.types.ComparableString;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -175,16 +184,6 @@ public class Main {
             System.out.print(res + "ms\t\t");
         }
         System.out.println();
-    }
-
-
-    private static void sorterTest(Sorter sorter) {
-        
-        System.out.println("Testing for " + sorter.toString());
-        System.out.println("-------------------------------------------------");
-        integersTest(sorter);
-
-
     }
 
     private static void fillListIntegers(List<ComparableInteger> list, int count) {

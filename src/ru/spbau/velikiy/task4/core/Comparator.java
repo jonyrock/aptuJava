@@ -1,4 +1,4 @@
-package spbau.velikiy.task4;
+package spbau.velikiy.task4.core;
 
 /**
  * Outer interface for comparing objects

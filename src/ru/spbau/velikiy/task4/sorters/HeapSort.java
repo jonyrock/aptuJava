@@ -1,11 +1,12 @@
-package spbau.velikiy.task4;
+package spbau.velikiy.task4.sorters;
 
+
+import spbau.velikiy.task4.core.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class HeapSort<T extends Comparable<T>> implements Sorter<T> {
+public class HeapSort<T extends spbau.velikiy.task4.core.Comparable<T>> implements Sorter<T> {
 
     public void sort(List<T> list) {
         

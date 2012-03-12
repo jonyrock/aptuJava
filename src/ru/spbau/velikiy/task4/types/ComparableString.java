@@ -1,7 +1,7 @@
-package spbau.velikiy.task4;
+package spbau.velikiy.task4.types;
 
 //TODO comment
-public class ComparableString implements Comparable<ComparableString> {
+public class ComparableString implements spbau.velikiy.task4.core.Comparable<ComparableString> {
 
     public final String value;
 

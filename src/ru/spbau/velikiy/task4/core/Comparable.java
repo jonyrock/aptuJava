@@ -1,4 +1,4 @@
-package spbau.velikiy.task4;
+package spbau.velikiy.task4.core;
 
 /**
  * Inner interface for comparing objects
@@ -10,7 +10,7 @@ public interface Comparable<T> {
     /**
      * Compare itself with another object b     
      * @param x another object
-     * @return 1 if a>b, 0 if a=b and -1 if a<b 
+     * @return 1 if a >= x and 0 otherwise
      */
     int compareTo(T x);
 }

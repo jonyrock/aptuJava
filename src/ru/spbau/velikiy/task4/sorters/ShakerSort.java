@@ -1,10 +1,12 @@
-package spbau.velikiy.task4;
+package spbau.velikiy.task4.sorters;
 
+
+import spbau.velikiy.task4.core.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShakerSort<T extends Comparable<T>> implements Sorter<T> {
+public class ShakerSort<T extends spbau.velikiy.task4.core.Comparable<T>> implements Sorter<T> {
 
     public void sort(List<T> list) {
 

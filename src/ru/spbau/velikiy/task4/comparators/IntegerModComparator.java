@@ -1,5 +1,8 @@
-package spbau.velikiy.task4;
+package spbau.velikiy.task4.comparators;
 
+
+import spbau.velikiy.task4.types.ComparableInteger;
+import spbau.velikiy.task4.core.Comparator;
 
 // TODO comment
 public class IntegerModComparator implements Comparator<ComparableInteger> {
