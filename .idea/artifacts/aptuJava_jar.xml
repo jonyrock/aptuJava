@@ -5,7 +5,6 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
       </element>
-      <element id="module-output" name="aptuJava" />
       <element id="dir-copy" path="$PROJECT_DIR$/src" />
     </root>
   </artifact>
